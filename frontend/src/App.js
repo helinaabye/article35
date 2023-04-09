@@ -1,7 +1,9 @@
 import './App.css';
-import Landing from './Pages/Landing';
+//import Landing from './Pages/Landing';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
+//import AddBlog from './Pages/AddBlog';
+import Blogs from './Pages/Blogs';
 
 const theme = createTheme({
   palette: {
@@ -20,7 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
-      <Landing/>
+      <Blogs/>
     </div>
     </ThemeProvider>
   );

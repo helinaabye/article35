@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
-import { Link } from '@mui/material';
+import { Link, Grid } from '@mui/material';
 
 const Footer = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -24,12 +24,14 @@ const Footer = (props) => {
     };
 
   return (
-    <Paper sx={{ display: 'flex', position: 'fixed', boxShadow: 6,
+    <Paper sx={{ display: 'flex', boxShadow: 6,
         bottom: 0, left: 0, right: 0, borderRadius: 0,
         minHeight: '120px', backgroundColor: 'primary.main' }} elevation={3}>
         
-      <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'space-between'}}>
-        <Toolbar disableGutters>
+      <Container sx={{ display: 'flex', justifyContent: 'space-between'}}>
+      <Toolbar disableGutters sx={{ width: '100%' }}>
+      <Grid container item xs={3} sx={{ display: 'flex', justifyContent: 'space-between'}}>
+        
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex', color: 'white' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -48,7 +50,6 @@ const Footer = (props) => {
           >
             Article 35th
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -104,6 +105,8 @@ const Footer = (props) => {
           >
             LOGO
           </Typography>
+          </Grid>
+          <Grid container sx={{ display: 'flex', justifyContent: 'space-between'}}>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
             {pages.map((page) => (
               <Link
@@ -139,6 +142,7 @@ const Footer = (props) => {
               </Link>
             ))}
           </Box>
+          </Grid>
         </Toolbar>  
         </Container>
     </Paper>
