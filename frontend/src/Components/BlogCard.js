@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CssBaseline } from '@mui/material';
 
-export default function BlogCard() {
+
+const BlogCard = ({img, title, body}) => {
   return (
     <Card sx={{ maxWidth: 345, margin: '10px' }}>
       <CssBaseline/>
@@ -15,15 +16,15 @@ export default function BlogCard() {
         component="img"
         alt="green iguana"
         height="140"
-        image="https://plus.unsplash.com/premium_photo-1674332004007-535c8af278a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+        image={img ? img : "https://source.unsplash.com/random/?flowers"}
+        // image="https://plus.unsplash.com/premium_photo-1674332004007-535c8af278a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {title ? title : 'Lizard'}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {body ? body : 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'}
         </Typography>
       </CardContent>
       <CardActions>
@@ -33,3 +34,6 @@ export default function BlogCard() {
     </Card>
   );
 }
+
+
+export default BlogCard;

@@ -13,7 +13,7 @@ const Blogs = (props) => {
       <Header/>
       <h1>Blogs</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-      <BlogCard/>
+      <BlogCard img="https://source.unsplash.com/random/?cars" title="test" body="test test test test test test test test test test test"/>
       <BlogCard/>
       <BlogCard/>
       <BlogCard/>
