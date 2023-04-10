@@ -3,15 +3,17 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import Button from '@mui/material/Button';
 
+//Home page 
 const Landing = (props) => {
   return (
-    <div className="container">
+    <>    
+      <CssBaseline />
       <Header/>
       <h1>Home</h1> 
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
       <Footer/>       
-    </div>
+    </>
   )
 }
 
