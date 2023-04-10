@@ -22,18 +22,18 @@ class Storage():
     def __init__(self):
         """Initializes the MySql database"""
         self.__engine = create_engine(
-            "mysql+mysqldb://ketero_user:ketero@localhost/ketero_db",
+            "sqlite:///article35.db",
             pool_pre_ping=True
         )
 
     def all(self, cls=None):
         """Query on the current database session"""
         if cls is None:
-            objs = self.__session.query(City).all()
-            objs.extend(self.__session.query(Hospital).all())
+            objs = self.__session.query(Blogs).all()
+            objs.extend(self.__session.query(Events).all())
             objs.extend(self.__session.query(User).all())
-            objs.extend(self.__session.query(Order).all())
-            objs.extend(self.__session.query(Service).all())
+            objs.extend(self.__session.query(Tags).all())
+            
         else:
             if type(cls) == str:
                 cls = eval(cls)
