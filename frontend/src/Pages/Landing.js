@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import Button from '@mui/material/Button';
+import { CssBaseline } from '@mui/material';
 
 //Home page 
 const Landing = (props) => {
