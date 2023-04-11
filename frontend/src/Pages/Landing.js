@@ -9,11 +9,9 @@ const Landing = (props) => {
   return (
     <>    
       <CssBaseline />
-      <Header/>
       <h1>Home</h1> 
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
-      <Footer/>       
     </>
   )
 }

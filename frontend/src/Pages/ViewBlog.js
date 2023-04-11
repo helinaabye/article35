@@ -9,7 +9,6 @@ const ViewBlog = (props) => {
   return (
     <>
     <CssBaseline />
-      <Header/>
       <h1>Blog Title</h1> 
       <Grid container>
 
@@ -19,8 +18,7 @@ const ViewBlog = (props) => {
         <Grid item>
           <Button sx={{height:'1000px'}}>Test</Button>
         </Grid>
-      </Grid>
-      <Footer/>       
+      </Grid>  
     </>
   )
 }

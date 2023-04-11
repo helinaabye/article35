@@ -9,7 +9,6 @@ const AddBlog = (props) => {
   return (
     <>
     <CssBaseline />
-      <Header/>
       <h1>Home</h1> 
       <Grid container>
 
@@ -25,8 +24,7 @@ const AddBlog = (props) => {
         <Grid item>
           <p>Blog</p>
         </Grid>
-      </Grid>
-      <Footer/>       
+      </Grid> 
     </>
   )
 }

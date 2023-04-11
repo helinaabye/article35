@@ -4,6 +4,10 @@ import { purple } from '@mui/material/colors';
 //import AddBlog from './Pages/AddBlog';
 import Blogs from './Pages/Blogs';
 import { Routes, Route } from 'react-router-dom';
+import Signup from './Components/Signup';
+import SignInOutContainer from './Container/Auth';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 const theme = createTheme({
   palette: {
@@ -22,9 +26,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
+      <Header/>
       <Routes>
-      <Route path="/" element={<Blogs/>}/>
+      <Route path="/" element={<SignInOutContainer/>}/>
       </Routes>
+      <Footer/>
     
       
     </div>

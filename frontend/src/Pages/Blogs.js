@@ -9,7 +9,6 @@ import BlogCard from '../Components/BlogCard';
 const Blogs = (props) => {
   return (
     <>    
-      <CssBaseline />
       <Header/>
       <h1>Blogs</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
@@ -22,8 +21,7 @@ const Blogs = (props) => {
       <BlogCard/>
       <BlogCard/>
 
-      </Grid>
-      <Footer/>       
+      </Grid>  
     </>
   )
 }
