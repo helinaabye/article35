@@ -7,7 +7,7 @@ Date Created: April 07 2023
 """
 
 
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from uuid import uuid4
