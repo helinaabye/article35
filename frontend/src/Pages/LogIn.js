@@ -11,6 +11,7 @@ const LogIn = (props) => {
       <CssBaseline />
       <Header/>
       <h1>Welcome</h1> 
+      <p>Please sign up or sign in</p>
       <Button>Sign Up</Button>
       <Button color="secondary">Sign In</Button>
       <Footer/>       
