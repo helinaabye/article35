@@ -28,10 +28,9 @@ const AddBlog=() => {
     <div>
       <Button variant='contained' color='primary' onClick={handleClickOpen} style={btnstyle}>
             
-                <AddCircleOutlineIcon />
-            
-            Add Blog
-      </Button>
+        <AddCircleOutlineIcon />
+            New Blog
+        </Button>
       
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
         <DialogTitle>Add New Blog
@@ -43,8 +42,7 @@ const AddBlog=() => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button variant='contained' onClick={handleClose} color='primary' > Submit </Button>
         </DialogActions>
       </Dialog>
     </div>
