@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CssBaseline } from '@mui/material';
 
-
 const BlogCard = ({img, title, body}) => {
   return (
     <Card sx={{ maxWidth: 345, margin: '10px' }}>
