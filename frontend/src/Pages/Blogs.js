@@ -9,7 +9,8 @@ import BlogCard from '../Components/BlogCard';
 const Blogs = (props) => {
   return (
     <>    
-      <Header/>
+      
+      <AddBlog />
       <h1>Blogs</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
       <BlogCard img="https://source.unsplash.com/random/?cars" title="test" body="test test test test test test test test test test test"/>
