@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 import Button from '@mui/material/Button';
 import { Container, CssBaseline, Grid } from '@mui/material';
 import BlogCard from '../Components/BlogCard';
+import AddBlog from '../Components/AddBlog';
 
 //Page to view all blogs 
 const Blogs = (props) => {
