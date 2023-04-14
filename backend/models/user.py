@@ -33,7 +33,7 @@ class User(db.Model, BaseModel):
     def validate_password(self, password_plaintext):
 	    return bcrypt.check_password_hash(self.password_hash, self.confirm_password_hash, password_plaintext)
 
-	def generate_token(self):
+    def generate_token(self):
 		payload = {
 		'exp' : datetime.utcnow() + timedelta(days=1),
 		'iat' : datetime.utcnow(),
