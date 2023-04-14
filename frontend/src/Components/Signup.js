@@ -1,6 +1,4 @@
 import React from 'react';
-// import Footer from './Footer';
-// import Header from './Header';
 import { Checkbox, Grid, Paper, Avatar, Typography, TextField, Button, FormLabel, FormControl, Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 

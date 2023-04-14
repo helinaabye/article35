@@ -1,7 +1,7 @@
 import React from 'react';
 import { CssBaseline, Grid } from '@mui/material';
 import Blogs from './Blogs';
-import Events from './Events';
+import Events from './Projects';
 
 //About page 
 const About = (props) => {
@@ -12,7 +12,7 @@ const About = (props) => {
       <h1>About</h1>
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Grid item xs={8}>
-          <p></p>
+          <p>Article 35 is the 35th article in the constitution of Ethiopia stating the rights of women.</p>
         </Grid>
         <Grid item xs={4}>
           <Events/>

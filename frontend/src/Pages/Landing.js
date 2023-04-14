@@ -1,7 +1,7 @@
 import React from 'react';
 import { CssBaseline, Grid } from '@mui/material';
 import Blogs from './Blogs';
-import Events from './Events';
+import Projects from './Projects';
 
 //Home page 
 const Landing = (props) => {
@@ -13,7 +13,7 @@ const Landing = (props) => {
           <Blogs/>
         </Grid>
         <Grid item xs={4}>
-          <Events/>
+          <Projects/>
         </Grid>
       </Grid>
     </>
