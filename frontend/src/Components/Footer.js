@@ -2,19 +2,16 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
 import { Link, Grid } from '@mui/material';
 
 const Footer = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const pages = ['About', 'SheLeads', 'Blog'];
+    const resource = ['About', 'SheLeads', 'Blog'];
+    const partners = ['AWIB', 'EBR', 'Nalafem'];
+    const connect = ['LinkedIn', 'Twitter', 'NewsLetter'];
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -50,42 +47,6 @@ const Footer = (props) => {
           >
             Article 35th
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -106,39 +67,81 @@ const Footer = (props) => {
             LOGO
           </Typography>
           </Grid>
-          <Grid container sx={{ display: 'flex', justifyContent: 'space-between'}}>
+          <Grid container sx={{ display: 'flex', justifyContent: 'space-between', p: 1}}>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-            {pages.map((page) => (
+          <Typography 
+              variant="h6"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                m: 2,
+                pl: 10,
+                fontWeight: 700,
+                color: 'white',
+                textDecoration: 'none'
+              }}>
+                Resources
+              </Typography>
+            {resource.map((resource) => (
               <Link
-                key={page}
+                key={resource}
                 onClick={handleCloseNavMenu}
                 sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
               >
-                {page}
+                {resource}
               </Link>
             ))}
           </Box>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-            {pages.map((page) => (
+          <Typography 
+              variant="h6"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                m: 2,
+                pl: 10,
+                fontWeight: 700,
+                color: 'white',
+                textDecoration: 'none'
+              }}>
+                Partners
+              </Typography>
+            {partners.map((partners) => (
               <Link
-                key={page}
+                key={partners}
                 onClick={handleCloseNavMenu}
                 sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
               >
-                {page}
+                {partners}
               </Link>
             ))}
           </Box>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-            {pages.map((page) => (
+            <Typography 
+              variant="h6"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                m: 2,
+                pl: 10,
+                fontWeight: 700,
+                color: 'white',
+                textDecoration: 'none'
+              }}>
+                Connect
+              </Typography>
+            {connect.map((connect) => (
               <Link
-                key={page}
+                key={connect}
                 onClick={handleCloseNavMenu}
                 sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
               >
-                {page}
+                {connect}
               </Link>
             ))}
           </Box>

@@ -8,6 +8,8 @@ import Signup from './Components/Signup';
 import SignInOutContainer from './Container/Auth';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import Landing from './Pages/Landing';
+import About from './Pages/About';
 
 const theme = createTheme({
   palette: {
@@ -28,7 +30,7 @@ function App() {
     <div className="App">
       <Header/>
       <Routes>
-      <Route path="/" element={<Blogs/>}/>
+      <Route path="/" element={<About/>}/>
       </Routes>
       <Footer/>
     

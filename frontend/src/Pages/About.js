@@ -3,14 +3,16 @@ import { CssBaseline, Grid } from '@mui/material';
 import Blogs from './Blogs';
 import Events from './Events';
 
-//Home page 
-const Landing = (props) => {
+//About page 
+const About = (props) => {
   return (
     <>    
       <CssBaseline/>
+      
+      <h1>About</h1>
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Grid item xs={8}>
-          <Blogs/>
+          <p></p>
         </Grid>
         <Grid item xs={4}>
           <Events/>
@@ -20,4 +22,4 @@ const Landing = (props) => {
   )
 }
 
-export default Landing;
+export default About;

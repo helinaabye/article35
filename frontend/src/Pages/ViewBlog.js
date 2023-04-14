@@ -13,7 +13,6 @@ const ViewBlog = (props) => {
       <Grid container>
 
       <Grid item>
-          <p>Blog</p>
         </Grid>
         <Grid item>
           <Button sx={{height:'1000px'}}>Test</Button>

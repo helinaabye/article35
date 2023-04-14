@@ -26,10 +26,10 @@ const AddBlog=() => {
 
   return (
     <div>
-      <Button variant='contained' color='primary' onClick={handleClickOpen} style={btnstyle}>
-            
+      {/* <Button variant='contained' color='primary' onClick={handleClickOpen} style={btnstyle}> */}
+      <Button variant='contained' color='primary' onClick={handleClickOpen}>
         <AddCircleOutlineIcon />
-            New Blog
+            Add Blog
         </Button>
       
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
