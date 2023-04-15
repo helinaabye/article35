@@ -4,9 +4,11 @@ from models.user import User
 
 class Blog(db.Model, BaseModel):
 	__tablename__ = 'blogs'
+    author = db.Column(db.String(150), nullable=False)
     title = db.Column(db.String(150), nullable=False)
     blogData = db.Column(db.String(20000), nullable=False)
     imageUrl = db.Column(db.String(10000), nullable=False)
+    summary = db.Column(db.String(5000), nullabe=False)
     checked = db.Column(db.Boolean, nullable=False)
     
     user_id = db.Column(db.Integer, db.ForeignKey('user_id'), nullable=False)
