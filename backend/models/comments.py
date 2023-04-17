@@ -1,5 +1,5 @@
 from app import db 
-from modles.base import BaseModel
+from models.base import BaseModel
 from models.blogs import Blog
 from models.user import User 
 
@@ -24,4 +24,4 @@ class NestedComment(db.Model, BaseModel):
     comment = db.relationship('Comment', backref='nested_comments')
      
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationships('User', backref='nested_comments')
+    user = db.relationship('User', backref='nested_comments')

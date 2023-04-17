@@ -13,10 +13,10 @@ class User(db.Model, BaseModel):
   username = db.Column(db.String(50), nullable=False)
   email = db.Column(db.String(130), nullable=False, unique=True)
   nikename = db.Column(db.String(130), nullable=False)
-  phonenumber = db.Column(db.Integer(20), nullable=False unique=True)
+  phonenumber = db.Column(db.Integer, nullable=False, unique=True)
   password_hash = db.Column(db.String(130), nullable=False)
   confirm_password_hash = db.Column(db.String(130), nullable=False)
-  age = db.Column(db.Integer(10), nullable=False)
+  age = db.Column(db.Integer, nullable=False)
 
   @hybrid_property
   def password(self):

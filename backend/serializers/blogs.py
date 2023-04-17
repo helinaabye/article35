@@ -1,7 +1,7 @@
 from app import ma
-from serialzilers.base import BaseSchema
+from serializers.base import BaseSchema
 from marshmallow import fields
-from models.blogs import Blogs
+from models.blogs import Blog
 
 class BlogSchema(ma.SQLAlchemyAutoSchema, BaseSchema):
 
@@ -11,7 +11,7 @@ class BlogSchema(ma.SQLAlchemyAutoSchema, BaseSchema):
 		load_only = ('user_id')
 
 	user_id = fields.Integer()
-	user = fields.Nested('UserSchema', only='id', 'username')
+	user = fields.Nested('UserSchema', only=('id', 'username'))
 
 class PopulateBlogSchema(BlogSchema):
 	class Meta:

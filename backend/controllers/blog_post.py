@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request, g
 from models.blogs import Blog
-from models.comments import Comment, NastedComment
+from models.comments import Comment, NestedComment
 from serializers.blogs import BlogsSchema, PopulateBlogSchema
 from serializers.comments import CommetSchema, NestedCommentSchema
 from securerouter.secure_route import secure_route
@@ -100,12 +100,9 @@ def comment_create(blog_id):
 @router.route('comments/<int:id>', methods=['GET'])
 def get_single_comment(id):
 	comment = Comment.query.get(id)
-
-    
-    if not comment:
-    	return {'message': 'Blog is not available'}, 404
-
-    return comment_schema.jsonify(comment), 200
+	if not comment:
+		return {'message': 'Blog is not available'}, 404
+	return comment_schema.jsonify(comment), 200
 
 # Delete a Comment
 

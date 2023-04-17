@@ -1,15 +1,15 @@
 from flask import Flask
-from environment.config import db_URI
-from flask_sqlalchemy import SQLAchemy
+# from environment.config import db_URI
+from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__, static_folder='dist')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_URI
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./article35.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAchemy(app)
+db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 
@@ -20,7 +20,7 @@ app.register_blueprint(user.router, url_prefix="/api")
 
 import os 
 
-@app.route('/' defaults={'path': ''}) # landing page
+@app.route('/', defaults={'path': ''}) # landing page
 @app.route('/<path:path>') # any other paths
 def catch_all(path):
 	dirname = os.path.dirname(__file__)
