@@ -56,6 +56,9 @@ function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
               <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'flex-end'}} >
                 <Grid item>
+                <NavLink sx={{color: 'white'}} className='nav' id={'Home'} to={'./'}>{'Home'}</NavLink>
+              </Grid>
+                <Grid item>
                 <NavLink className='nav' id={'About'} to={'./About'}>{'About'}</NavLink>
               </Grid>
               <Grid item>

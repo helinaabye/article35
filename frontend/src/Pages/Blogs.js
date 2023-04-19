@@ -8,12 +8,19 @@ import { CloseOutlined } from '@mui/icons-material';
 //Page to view all blogs 
 const Blogs = (props) => {
   const crdsty = {backgroundcolor : 'red'}
-  const [data, setData ] = useState([])
-  useEffect(()=>{
-    axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(res => setData(res.data))
-    .catch(err => console.log(err))
+  const [userData, setUserData ] = useState([])
+  const [postData, setPostData ] = useState([])
+  // useEffect(()=>{
+  //   axios.get('https://jsonplaceholder.typicode.com/users')
+  //   .then(res => setUserData(res.data))
+  //   .catch(err => console.log(err))
 
+  // },[])
+
+  useEffect(()=>{
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(res => setPostData(res.data))
+    .catch(err => console.log(err))
   },[])
 
   return (
@@ -21,33 +28,12 @@ const Blogs = (props) => {
       <h1>Blogs</h1> 
       {/* <AddBlog /> */}
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-      {/* <BlogCard img="https://source.unsplash.com/random/?cars" title="test" body="test test test test test test test test test test test"/>
-      <BlogCard/>
-      <BlogCard/>
-      <BlogCard/>
-      <BlogCard/>
-      <BlogCard/>
-      <BlogCard/>
-      <BlogCard/> */}
-      <Card sx={{ maxWidth: 345, margin: '10px' }} style={crdsty}>
-        {
-          data.map((user,index) => {
-            return <CardContent key={index}>
-              <Typography>
-                {user.name}
-              </Typography>
-              <Typography>
-                <Link>{user.username}</Link>
-                
-              </Typography>
-
-            </CardContent>
-
-          
+       {
+          postData.slice(0, 6).map((post,index) => {
+            console.log(post)
+            return <BlogCard key={index} img="https://source.unsplash.com/random/?writing" title={post.title} body={post.body}/>          
           })
         }
-      </Card>
-
       </Grid>  
     </>
   )
