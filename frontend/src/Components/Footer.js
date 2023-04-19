@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
 import { Link, Grid } from '@mui/material';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 const Footer = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -67,84 +67,79 @@ const Footer = (props) => {
             LOGO
           </Typography>
           </Grid>
-          <Grid container sx={{ display: 'flex', justifyContent: 'space-between', p: 1}}>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-          <Typography 
-              variant="h6"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                m: 2,
-                pl: 10,
-                fontWeight: 700,
-                color: 'white',
-                textDecoration: 'none'
-              }}>
-                Resources
-              </Typography>
-            {resource.map((resource) => (
-              <Link
-                key={resource}
-                onClick={handleCloseNavMenu}
-                sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
-              >
-                {resource}
-              </Link>
-            ))}
-          </Box>
+          <Grid container sx={{ display: 'flex', justifyContent: 'space-between', m:2, p: 1}}>
+            <Grid item container xs={4} spacing={2} direction='column'>
+              <Grid item>
+              <Typography 
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    fontWeight: 700,
+                    color: 'white',
+                    textDecoration: 'none'
+                  }}>
+                    Resources
+                  </Typography>
+              </Grid>
+              <Grid item>
+                <Link component={RouterLink} className='nav' rel="noopener" to={'./About'} color='white' underline="hover">About</Link>
+              </Grid>
+              <Grid item>
+                <Link component={RouterLink} className='nav' rel="noopener" to={'./Projects'} color='white' underline="hover">Projects</Link>
+              </Grid>
+              <Grid item>
+                <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='white' underline="hover">Blogs</Link>
+              </Grid>
+          </Grid>
           
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-          <Typography 
-              variant="h6"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                m: 2,
-                pl: 10,
-                fontWeight: 700,
-                color: 'white',
-                textDecoration: 'none'
-              }}>
-                Partners
-              </Typography>
-            {partners.map((partners) => (
-              <Link
-                key={partners}
-                onClick={handleCloseNavMenu}
-                sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
-              >
-                {partners}
-              </Link>
-            ))}
-          </Box>
+          <Grid item container xs={4} spacing={2} direction='column'>
+              <Grid item>
+              <Typography 
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    fontWeight: 700,
+                    color: 'white',
+                    textDecoration: 'none'
+                  }}>
+                    Partners
+                  </Typography>
+              </Grid>
+              <Grid item>
+                <Link href={'https://awibethiopia.org/'} color='white' underline="hover">AWIB</Link>
+              </Grid>
+              <Grid item>
+                <Link href={'https://ethiopianbusinessreview.net/2019/04/'} color='white' underline="hover">EBR</Link>
+              </Grid>
+              <Grid item>
+                <Link href={'https://nalafem.org/who-we-are/'} color='white' underline="hover">Nalafem</Link>
+              </Grid>
+          </Grid>
           
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
-            <Typography 
-              variant="h6"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                m: 2,
-                pl: 10,
-                fontWeight: 700,
-                color: 'white',
-                textDecoration: 'none'
-              }}>
-                Connect
-              </Typography>
-            {connect.map((connect) => (
-              <Link
-                key={connect}
-                onClick={handleCloseNavMenu}
-                sx={{ m: 1, pl: 10, color: 'white', display: 'block' }}
-              >
-                {connect}
-              </Link>
-            ))}
-          </Box>
+          <Grid item container xs={4} spacing={2} direction='column'>
+              <Grid item>
+              <Typography 
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    fontWeight: 700,
+                    color: 'white',
+                    textDecoration: 'none'
+                  }}>
+                    Connect
+                  </Typography>
+              </Grid>
+              <Grid item>
+                <Link href={'https://linkedin.com/'} color='white' underline="hover">LinkedIn</Link>
+              </Grid>
+              <Grid item>
+                <Link href={'https://twitter.com'} color='white' underline="hover">Twitter</Link>
+              </Grid>
+              <Grid item>
+                <Link href='#' color='white' underline="hover">NewsLetter</Link>
+              </Grid>
+          </Grid>
+
           </Grid>
         </Toolbar>  
         </Container>

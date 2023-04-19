@@ -33,7 +33,7 @@ a {
 }
 
 a.active {
-  color: white;
+  color: gold;
 }
 
 @keyframes App-logo-spin {
