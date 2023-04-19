@@ -4,10 +4,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link, NavLink } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { NavLink as RouterLink } from 'react-router-dom';
+import { Link, Grid } from '@mui/material';
 
 const pages = ['About', 'Projects', 'Blog', 'Login'];
 
@@ -56,20 +55,20 @@ function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
               <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'flex-end'}} >
                 <Grid item>
-                <NavLink sx={{color: 'white'}} className='nav' id={'Home'} to={'./'}>{'Home'}</NavLink>
-              </Grid>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./'} color='white' underline="hover">Home</Link>
+                </Grid>
                 <Grid item>
-                <NavLink className='nav' id={'About'} to={'./About'}>{'About'}</NavLink>
-              </Grid>
-              <Grid item>
-                <NavLink className='nav' id={'Projects'} to={'./Projects'}>{'Projects'}</NavLink>
-              </Grid>
-              <Grid item>
-                <NavLink className='nav' id={'Blogs'} to={'./Blogs'}>{'Blogs'}</NavLink>
-              </Grid>
-              <Grid item>
-                <NavLink className='nav' id={'Login'} to={'./Login'}>{'Login'}</NavLink>
-              </Grid>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./About'} color='white' underline="hover">About</Link>
+                </Grid>
+                <Grid item>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Projects'} color='white' underline="hover">Projects</Link>
+                </Grid>
+                <Grid item>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='white' underline="hover">Blogs</Link>
+                </Grid>
+                <Grid item>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
+                </Grid>
               </Grid>
           </Box>
         </Toolbar>
