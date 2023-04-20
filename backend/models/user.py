@@ -1,64 +1,30 @@
-from app import db, bcrypt
-from models.base import BaseModel
-from datetime import *
-from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import validates
-from environment.config import secret 
-import jwt 
-import re 
+#!/usr/bin/python3
+"""
+file: user.py
+Desc: Module that contains user module of the app
+Authors: .....
+Date Created: Apr 20 2023
+"""
 
-class User(db.Model, BaseModel):
-  __tablename__ = 'users'
+from models.base import BaseModel, Base
+from sqlalchemy import Column, String, Text, ForeignKey, Integer, Integer, Integer, Integer
+from sqlalchemy.orm import relationship
+from typing import Any
 
-  username = db.Column(db.String(50), nullable=False)
-  email = db.Column(db.String(130), nullable=False, unique=True)
-  nikename = db.Column(db.String(130), nullable=False)
-  phonenumber = db.Column(db.Integer, nullable=False, unique=True)
-  password_hash = db.Column(db.String(130), nullable=False)
-  confirm_password_hash = db.Column(db.String(130), nullable=False)
-  age = db.Column(db.Integer, nullable=False)
 
-  @hybrid_property
-  def password(self):
-    pass
+class User(BaseModel, Base):
+    """User model"""
+    __tablename__ = 'users'
+    first_name = Column(String(200), nullable=False)
+    last_name = Column(String(200))
+    username = Column(String(200), nullable=False)
+    age = Column(Integer)
+    email = Column(String(200), nullable=False)
+    phone_number = Column(String(200), nullable=False)
+    password_digest = Column(String(1024), nullable=False)
 
-  @password.setter
-  def password(self, password_plaintext):
-    if not re.match('^(?=.*\W)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{5,20}$', password_plaintext):
-      raise AssertionError('Password must contain 1 capital, 1 number, 1 symbol and be between 5 and 20 charetars long.')
-    self.password_hash = bcrypt.generate_password_hash(password_plaintext).decode('utf-8')
+    blogs = relationship('Blog', backref='users')
+    events = relationship('Event', backref='users')
 
-  def validate_password(self, password_plaintext):
-    return bcrypt.check_password_hash(self.password_hash, password_plaintext)
-  
-  def generate_token(self):
-    payload = {
-      'exp': datetime.utcnow() + timedelta(days=1),
-      'iat': datetime.utcnow(),
-      'sub': self.id
-    }
-    token = jwt.encode(
-      payload,
-      secret,
-      'HS256'
-    ).decode('utf-8')
-
-    return token
-
-  @validates('username') 
-  def validate_username(self, key, username):
-    if not username:
-      raise AssertionError('No username provided')
-    if len(username) < 2 or len(username) > 20:
-      raise AssertionError('Username must be between 3 and 20 characters') 
-    return username 
-  
-  @validates('email') 
-  def validate_email(self, key, email):
-    if not email:
-      raise AssertionError('No email provided')
-    if User.query.filter(User.email == email).first():
-      raise AssertionError('Email is already in use')
-    if not re.match("[^@]+@[^@]+\.[^@]+", email):
-      raise AssertionError('Provided email is not an email address') 
-    return email
+    def __init__(self, *args: str, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
