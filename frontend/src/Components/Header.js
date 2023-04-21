@@ -6,16 +6,25 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { Link, Grid } from '@mui/material';
+import { Link, Grid, MenuItem, Menu, Tooltip, IconButton, Avatar } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const pages = ['About', 'Projects', 'Blog', 'Login'];
+function Header() {  
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-function Header() {
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -23,7 +32,7 @@ function Header() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'flex'},
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -33,26 +42,7 @@ function Header() {
           >
             Article 35th
           </Typography>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
+          <Box sx={{ flexGrow: 1, display: {  xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
               <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'flex-end'}} >
                 <Grid item>
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./'} color='white' underline="hover">Home</Link>
@@ -70,6 +60,46 @@ function Header() {
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
                 </Grid>
               </Grid>
+          </Box>
+
+          <Box sx={{ display: { xs: 'flex', md: 'none',  justifyContent: 'flex-end' }, flexGrow: 1 }}>
+            <Tooltip title="Menu">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <MenuIcon sx={{ color: 'white'}} />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+                <MenuItem key={'Home'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./'} color='purple' underline="hover">Home</Link>
+                </MenuItem>
+                <MenuItem key={'About'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./About'} color='purple' underline="hover">About</Link>
+                </MenuItem>
+                <MenuItem key={'Projects'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Projects'} color='purple' underline="hover">Projects</Link>
+                </MenuItem>
+                <MenuItem key={'Blogs'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='purple' underline="hover">Blogs</Link>
+                </MenuItem>
+                <MenuItem key={'Login'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='purple' underline="hover">Login</Link>
+                </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
