@@ -15,6 +15,7 @@ from sqlalchemy import (
     Integer,
     Table
 )
+from sqlalchemy.orm import relationship
 from typing import Any
 
 # Many-to-Many relationship with tags
@@ -41,6 +42,7 @@ class Blog(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     links = Column(String(20000))
     likes = Column(Integer, default=0)
+    comments = relationship('Comment', backref='users')
 
     def __init__(self, *args: str, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)

@@ -23,7 +23,7 @@ class BaseModel:
     created_at: DateTime = Column(DateTime, default=datetime.utcnow())
     updated_at: DateTime = Column(DateTime, default=datetime.utcnow())
 
-    def __init__(self, *args: str, **kwargs: Any) -> None:
+    def __init__(self, *args: list, **kwargs: dict) -> None:
         """Initializes the BaseModel class with preferable attributes"""
         if kwargs:
             for k, v in kwargs.items():
@@ -65,7 +65,7 @@ class BaseModel:
         if "_sa_instance_state" in my_dict:
             del my_dict["_sa_instance_state"]
         if cls_name == "User":
-            del my_dict['password']
+            del my_dict['password_digest']
         return my_dict
 
     def save(self) -> None:

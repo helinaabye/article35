@@ -33,7 +33,7 @@ event_tag = Table(
 class Event(BaseModel, Base):
     """Event model"""
     __tablename__ = 'events'
-    address = Column(String(1024), nullable=False)
+    location = Column(String(1024), nullable=False)
     title = Column(String(1024), nullable=False)
     web_link = Column(String(10000))
     description = Column(Text, nullable=False)

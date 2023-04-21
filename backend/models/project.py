@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 file: project.py
-Desc: Module that contains event model of the app
+Desc: Module that contains project model of the app
 Authors: .....
 Date Created: Apr 20 2023
 """
