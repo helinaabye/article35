@@ -27,9 +27,9 @@ const Footer = (props) => {
         
       <Container sx={{ display: 'flex', justifyContent: 'space-between'}}>
       <Toolbar disableGutters sx={{ width: '100%' }}>
-      <Grid container item xs={3} sx={{ display: 'flex', justifyContent: 'space-between'}}>
+      <Grid container item xs={3} sx={{ display: {xs: 'none', md:'flex'}, justifyContent: 'space-between'}}>
         
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex', color: 'white' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'flex', color: 'white' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -37,7 +37,7 @@ const Footer = (props) => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'none', md:'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -47,27 +47,8 @@ const Footer = (props) => {
           >
             Article 35th
           </Typography>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
           </Grid>
-          <Grid container sx={{ display: 'flex', justifyContent: 'space-between', m:2, p: 1}}>
+          <Grid container sx={{ display: { xs: 'flex', md: 'flex'}, justifyContent: 'space-between', m:2, p: 1}}>
             <Grid item container xs={4} spacing={2} direction='column'>
               <Grid item>
               <Typography 
