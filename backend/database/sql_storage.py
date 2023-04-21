@@ -10,6 +10,8 @@ from models.user import User, Base
 from models.blog import Blog
 from models.event import Event
 from models.tag import Tag
+from models.project import Project
+from models.comment import Comment
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
@@ -30,6 +32,8 @@ class Storage():
             objs.extend(self.__session.query(Event).all())
             objs.extend(self.__session.query(User).all())
             objs.extend(self.__session.query(Tag).all())
+            objs.extend(self.__session.query(Project).all())
+            objs.extend(self.__session.query(Comment).all())
         else:
             if type(cls) == str:
                 cls = eval(cls)

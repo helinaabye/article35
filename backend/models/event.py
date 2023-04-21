@@ -17,7 +17,7 @@ from sqlalchemy import (
 )
 from typing import Any
 
-
+# Many to many relationship with tags
 event_tag = Table(
     'event_tag',
     Base.metadata,

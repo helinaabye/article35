@@ -12,11 +12,12 @@ from sqlalchemy import (
     Text,
     ForeignKey,
     Boolean,
+    Integer,
     Table
 )
 from typing import Any
 
-
+# Many-to-Many relationship with tags
 blog_tag = Table(
     'blog_tag',
     Base.metadata,
@@ -34,10 +35,12 @@ class Blog(BaseModel, Base):
     __tablename__ = 'blogs'
     title = Column(String(4000), nullable=False)
     summery = Column(String(5000), nullable=False)
-    checked = Column(Boolean, default=False)
+    approved = Column(Boolean, default=False)
     image_url = Column(String(2048))
-    blog_data = Column(Text, nullable=False)
+    content = Column(Text, nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    links = Column(String(20000))
+    likes = Column(Integer, default=0)
 
     def __init__(self, *args: str, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
