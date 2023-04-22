@@ -84,3 +84,11 @@ class Storage():
             if type(obj) == cls:
                 count += 1
         return count
+
+    def search_by_username(self, username):
+        """Searchs user by username"""
+        all_users = self.all(User).values()
+        for user in all_users:
+            if user.username == username:
+                return user
+        return None

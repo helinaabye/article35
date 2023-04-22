@@ -18,6 +18,8 @@ def handle_requests_for_user_images(user_id):
     """Handles requests related to user profile pictures"""
     if request.method == 'GET':
         user = storage.get(User, user_id)
+        if not user.image_url:
+            return {'message': 'No image uploaded'}
         filename = user.image_url
         return send_file(filename, mimetype='image/png')
 

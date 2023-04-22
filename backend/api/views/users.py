@@ -99,3 +99,18 @@ def handle_request_for_single_user(user_id):
         storage.delete(user)
         storage.save()
         return jsonify(user.to_dict()), 200
+
+
+@app_views.route('/users/sign-in', methods=['POST'])
+def login_user():
+    """Handles user login actions"""
+    if request.method == 'POST':
+        data = request.form
+        # Check if username exists
+        user = storage.search_by_username(data.get('username'))
+        if not user:
+            abort(401)
+        # Check if the password is valid
+        if not is_valid(user.password_digest, data.get('password')):
+            abort(401)
+        return jsonify(user.to_dict())
