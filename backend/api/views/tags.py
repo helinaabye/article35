@@ -11,7 +11,7 @@ from models import storage
 from models.tag import Tag
 
 
-def validate_tag_input(data: dict) -> dict[str, str] | None:
+def validate_tag_input(data):
     """Method to validate tag data sent from the front end"""
     if data is None:
         abort(400, "Not a Json")
