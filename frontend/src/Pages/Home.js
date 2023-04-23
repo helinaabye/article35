@@ -5,15 +5,15 @@ import Projects from './Projects';
 import Events from './Events';
 
 //Home page 
-const Landing = (props) => {
+const Home = (props) => {
   return (
     <>    
       <CssBaseline/>
-      <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <Grid item xs={8}>
+      <Grid container>
+        <Grid item xs={12} md={8}>
           <Blogs/>
         </Grid>
-        <Grid item container direction='row' xs={4}>
+        <Grid item container direction='row' xs={12} md={4}>
           <Grid item><Projects/></Grid>
           <Grid item><Events/></Grid>
         </Grid>
@@ -22,4 +22,4 @@ const Landing = (props) => {
   )
 }
 
-export default Landing;
+export default Home;

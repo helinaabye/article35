@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Paper, Tabs, Tab, Typography, Box, CssBaseline, } from '@mui/material';
 import Signup from '../Components/Signup';
-import Auth from '../Components/Auth';
+import Signin from '../Components/Signin';
 
 
 const Login=()=>{
@@ -47,7 +47,7 @@ const handleChange = (event, newValue) => {
           <Tab label="Sign Up" />
         </Tabs>
         <TabPanel value={value} index={0}>
-       <Auth handleChange={handleChange}/>
+       <Signin handleChange={handleChange}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
       <Signup/>

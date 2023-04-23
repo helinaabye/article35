@@ -30,7 +30,6 @@ const Blogs = (props) => {
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
        {
           postData.slice(0, 6).map((post,index) => {
-            console.log(post)
             return <BlogCard key={index} img="https://source.unsplash.com/random/?writing" title={post.title} body={post.body}/>          
           })
         }
