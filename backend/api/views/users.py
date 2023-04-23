@@ -57,7 +57,7 @@ def user_signup():
             'last_name': data.get('last_name'),
             'username': data.get('username'),
             'password_digest': hash_password(data.get('password')),
-            'is_admin': True if data.get('is_admin') == 'True' else False,
+            'is_admin': True if data.get('password') == 'True' else False,
             'email': data.get('email'),
             'phone_number': data.get('phone_number')
         }
@@ -73,7 +73,7 @@ def handle_request_for_single_user(user_id):
     if user is None:
         abort(404, "User with id {} Not found".format(user_id))
     if request.method == 'GET':
-        return jsonify(user.to_dict())
+        return jsonify(user.to_dict()), 200
     if request.method == 'PUT':
         file = request.files
         data = request.form
@@ -114,17 +114,3 @@ def login_user():
         if not is_valid(user.password_digest, data.get('password')):
             abort(401)
         return jsonify(user.to_dict())
-
-
-@app_views.route('/users/<user_id>/blogs', methods=['GET'])
-def get_blogs_posted_by_user(user_id):
-    """Handles requests for retrieving blogs made by users"""
-    user = storage.get(User, user_id)
-    if not user:
-        abort(404, "User with id {} doesn't exist".format(user_id))
-    blogs = user.blogs
-    for b in blogs:
-        if type(b.links) == str:
-            setattr(b, 'links', eval(b.links))
-    blogs = [b.to_dict() for b in blogs]
-    return jsonify(blogs), 200

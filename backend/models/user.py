@@ -31,8 +31,6 @@ class User(BaseModel, Base):
     events = relationship('Event', backref='users')
     # One to many relationship with projects
     projects = relationship('Project', backref='users')
-    # One to many relationship with comments
-    comments = relationship('Comment', backref='users')
 
     def __init__(self, *args: str, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
