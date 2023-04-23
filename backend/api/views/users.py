@@ -128,3 +128,14 @@ def get_blogs_posted_by_user(user_id):
             setattr(b, 'links', eval(b.links))
     blogs = [b.to_dict() for b in blogs]
     return jsonify(blogs), 200
+
+
+@app_views.route('/users/<user_id>/events', methods=['GET'])
+def get_events_posted_by_user(user_id):
+    """Handles requests for retrieving events made by users"""
+    user = storage.get(User, user_id)
+    if not user:
+        abort(404, "User with id {} doesn't exist".format(user_id))
+    events = user.events
+    events = [e.to_dict() for e in events]
+    return jsonify(events), 200
