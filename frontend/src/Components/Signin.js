@@ -12,40 +12,29 @@ const Signin=(props)=>{
   const btnstyle = {margin:'8px 0'}
   const txtstyle = {margin:'8px 0'}
   const navigate = useNavigate();
-  const [ inputs, setInputs ] = useState({})
+  const [ inputs, setInputs ] = useState([])
   const [ userData, setUserData ] = useState([])
   const [ firstUser, setFirstUser ] = useState(false)
   const { auth, dispatch } = useContext(AuthContext);
 
-  useEffect(()=>{
-      // Axios Method
-      axios.get('https://www.gizachew-bayness.tech/api/users')
-      .then(({data}) => {
-      console.log(data)
-        if (data.length == 0) {
-          setFirstUser(true)
-        } else {
-          setFirstUser(false)
-          setUserData(data)
-        }
-        
-      console.log(firstUser, userData)
-      })
-      .catch(err => console.log(err))
-    },[])
-
-    const submit = () => {
-      if (userData && inputs.email && inputs.password) 
-      {
-        axios.get(`https://www.gizachew-bayness.tech/api/users?${new URLSearchParams(inputs).toString()}`)
-        .then(({data}) => {
-          if (data.length === 1) {
-            dispatch({type: "SIGN_IN", user: data[0]})
-            navigate('/')
-          } else alert('Please sign up to log in')
+  const submit = () => {
+    if (inputs.username && inputs.password) 
+    {
+        axios({
+          method: "post",
+          url: "https://www.gizachew-bayness.tech/api/users/sign-in",
+          data: inputs,
+          headers: { "Content-Type": "multipart/form-data" },
         })
-      }
+        .then(({data}) => {
+          if (data) {
+            dispatch({type: "SIGN_IN", user: data})
+            navigate('/')
+          }
+        })
+        .catch(err => console.log(err))
     }
+  }
 
 
   return (
@@ -60,7 +49,7 @@ const Signin=(props)=>{
 
           </Grid>
           <form onSubmit={(e) => submit(e.preventDefault())}>
-          <TextField variant="standard" fullWidth label='Email' placeholder="Enter your email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
+          <TextField variant="standard" fullWidth label='Email' placeholder="Enter your username" onChange={(e) => setInputs({ ...inputs, username: e.target.value })} />
           <TextField type='password' variant="standard" fullWidth label='Password' placeholder="Enter your password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
           <Button variant="contained" style={btnstyle} fullWidth type='submit' color='secondary'>Sign In</Button>
           <Typography>
@@ -75,7 +64,6 @@ const Signin=(props)=>{
           </Typography>
           </form>
         </Paper>
-
       </Grid>
     </>
   )

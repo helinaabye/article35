@@ -9,7 +9,6 @@ import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Grid, MenuItem, Menu, Tooltip, IconButton, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AuthContext } from '../contexts/authContext';
-import axios from 'axios';
 
 function Header() {  
   const [anchorElUser, setAnchorElUser] = React.useState(null);
