@@ -2,3 +2,6 @@
 .vscode
 __pycache__
 article35.db
+assets/blogs/*
+assets/events/*
+users/events/*
