@@ -8,11 +8,12 @@ import Signup from './Components/Signup';
 import SignInOutContainer from './Pages/Login';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import Landing from './Pages/Landing';
+import Home from './Pages/Home';
 import About from './Pages/About';
 import Projects from './Pages/Projects';
 import Login from './Pages/Login';
-
+import AuthContextProvider from './contexts/authContext';
+import Profile from './Pages/Profile';
 const theme = createTheme({
   palette: {
     primary: {
@@ -29,19 +30,20 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-      <Header/>
-      <Routes>
-      <Route exact path='/' element={<Landing/>}/>
-      <Route exact path="/About" element={<About/>}/>
-      <Route exact path="/Projects" element={<Projects/>}/>
-      <Route exact path="/Blogs" element={<Blogs/>}/>
-      <Route exact path="/Login" element={<Login/>}/>
-      </Routes>
-      <Footer/>
-    
-      
-    </div>
+      <AuthContextProvider>
+        <div className="App">
+          <Header/>
+          <Routes>
+            <Route exact path='/' element={<Home/>}/>
+            <Route exact path="/About" element={<About/>}/>
+            <Route exact path="/Projects" element={<Projects/>}/>
+            <Route exact path="/Blogs" element={<Blogs/>}/>
+            <Route exact path="/Login" element={<Login/>}/>
+            <Route exact path="/Profile" element={<Profile/>}/>
+          </Routes>
+          <Footer/>
+        </div>
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

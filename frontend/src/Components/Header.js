@@ -1,16 +1,19 @@
-import * as React from 'react';
+import React, { useEffect, useContext, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AdbIcon from '@mui/icons-material/Adb';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Grid, MenuItem, Menu, Tooltip, IconButton, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { AuthContext } from '../contexts/authContext';
+import axios from 'axios';
 
 function Header() {  
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -19,6 +22,7 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const { auth } = useContext(AuthContext);
 
   return (
     <AppBar position="static">
@@ -43,7 +47,7 @@ function Header() {
             Article 35th
           </Typography>
           <Box sx={{ flexGrow: 1, display: {  xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
-              <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'flex-end'}} >
+              <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}} >
                 <Grid item>
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./'} color='white' underline="hover">Home</Link>
                 </Grid>
@@ -57,7 +61,22 @@ function Header() {
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='white' underline="hover">Blogs</Link>
                 </Grid>
                 <Grid item>
-                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
+                  {
+                    auth.user && auth.user.id ? (
+                      <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color="inherit"
+                        onClick={() => navigate('/Profile')}
+                      >
+                        <Avatar alt={auth.user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${auth.user.id}`} />
+                      </IconButton>
+                    ) : (
+                      <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
+                    )
+                  }
                 </Grid>
               </Grid>
           </Box>
@@ -97,7 +116,21 @@ function Header() {
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='purple' underline="hover">Blogs</Link>
                 </MenuItem>
                 <MenuItem key={'Login'} onClick={handleCloseUserMenu}>
-                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='purple' underline="hover">Login</Link>
+                  {
+                    auth.user && auth.user.id ? (
+                      <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color="inherit"
+                      >
+                        <Avatar alt={auth.user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${auth.user.id}`} />
+                      </IconButton>
+                    ) : (
+                      <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='purple' underline="hover">Login</Link>
+                    )
+                  }
                 </MenuItem>
             </Menu>
           </Box>
