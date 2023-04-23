@@ -18,6 +18,8 @@ def handle_requests_for_user_images(user_id):
     """Handles requests related to user profile pictures"""
     if request.method == 'GET':
         user = storage.get(User, user_id)
+        if not user:
+            abort(400, 'No user found with id {}'.format(user_id))
         if not user.image_url:
             return {'message': 'No image uploaded'}
         filename = user.image_url
@@ -29,6 +31,10 @@ def handle_requests_for_blog_images(blog_id):
     """Handles requests related to blog imagegs"""
     if request.method == 'GET':
         blog = storage.get(Blog, blog_id)
+        if not blog:
+            abort(400, 'No blog found with id {}'.format(blog_id))
+        if not blog.image_url:
+            return {'message': 'No image uploaded'}
         filename = blog.image_url
         return send_file(filename, mimetype='image/png')
 
@@ -38,5 +44,9 @@ def handle_requests_for_event_images(event_id):
     """Handles requests related to event images"""
     if request.method == 'GET':
         event = storage.get(Event, event_id)
+        if not event:
+            abort(400, 'No event found with id {}'.format(event_id))
+        if not event.image_url:
+            return {'message': 'No image uploaded'}
         filename = event.image_url
         return send_file(filename, mimetype='image/png')

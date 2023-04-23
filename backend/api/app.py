@@ -45,6 +45,13 @@ def forbidden(error) -> str:
     return jsonify({"error": "Forbidden"}), 403
 
 
+@app.errorhandler(405)
+def forbidden(error) -> str:
+    """Method not allowed handler.
+    """
+    return jsonify({"error": "Method not allowed"}), 405
+
+
 @app.teardown_appcontext
 def tear_down_db(execute):
     """Removes the current SQLAlchemy session after each request

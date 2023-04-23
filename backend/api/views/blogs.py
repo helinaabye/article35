@@ -116,7 +116,7 @@ def handle_request_for_single_blog(blog_id):
         return jsonify(blog.to_dict()), 200
 
 
-@app_views.route('/blogs/<blog_id>/comments', methods=['GET', 'POST'])
+@app_views.route('/blogs/<blog_id>/comments', methods=['GET'])
 def get_comments_for_blog(blog_id):
     """Handles requests to retrieve and post comments for blogs"""
     blog = storage.get(Blog, blog_id)
