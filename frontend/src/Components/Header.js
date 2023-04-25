@@ -9,6 +9,7 @@ import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Grid, MenuItem, Menu, Tooltip, IconButton, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AuthContext } from '../contexts/authContext';
+import TemporaryDrawer from './Sidebar'
 
 function Header() {  
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -22,8 +23,23 @@ function Header() {
     setAnchorElUser(null);
   };
   const { auth } = useContext(AuthContext);
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -72,10 +88,30 @@ function Header() {
                       >
                         <Avatar alt={auth.user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${auth.user.id}`} />
                       </IconButton>
+
                     ) : (
                       <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
                     )
                   }
+                </Grid>
+                <Grid item>
+                {
+                  auth.user && auth.user.id ? (
+                    <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    onClick={toggleDrawer("right", true)}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+
+                  ):(
+                    <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
+                  )
+                }
                 </Grid>
               </Grid>
           </Box>
@@ -123,6 +159,7 @@ function Header() {
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
                         color="inherit"
+                        
                       >
                         <Avatar alt={auth.user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${auth.user.id}`} />
                       </IconButton>
@@ -136,6 +173,8 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
+    <TemporaryDrawer state={state} setState={setState} toggleDrawer={toggleDrawer} ></TemporaryDrawer>
+    </>
   );
 }
 export default Header;

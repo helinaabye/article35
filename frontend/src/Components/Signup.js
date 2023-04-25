@@ -64,7 +64,7 @@ const Signup = (props) => {
                     <TextField variant="standard" fullWidth label='Username' placeholder="Enter your username" onChange={(e) => setInputs({ ...inputs, username: e.target.value })}/>
                     <TextField variant="standard" fullWidth label='Email' placeholder="Enter your email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
                     <TextField variant="standard" fullWidth label='Phone Number' placeholder="Enter your phone number" onChange={(e) => setInputs({ ...inputs, phone_number: e.target.value })} />
-                    <TextField variant="standard" fullWidth label='Password' placeholder="Enter your password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
+                    <TextField variant="standard" fullWidth label='Password' placeholder="Enter your password" type="password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
                     <TextField variant="standard" fullWidth label='Confirm Password' placeholder="Confirm your password"  onChange={(e) => setInputs({ ...inputs, confirm_password: e.target.value })}/>
                     <Button type='submit' variant='contained' color='secondary' style={btnstyle} fullWidth>Sign up</Button>
                 </form>
