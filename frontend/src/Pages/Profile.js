@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import AddBlogModal from '../Components/AddBlogModal';
 import Projects from './Projects';
 import Account from './Account';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 //Profile page 
 const Profile = (props) => {
@@ -61,10 +62,34 @@ const Profile = (props) => {
             </Box>
         </Grid>
         <Grid item xs={12}>
-          <TabPanel value="1"><Blogs/></TabPanel>
-          <TabPanel value="2"><Projects/></TabPanel>
-          <TabPanel value="3"><Events/></TabPanel>
-          <TabPanel value="4"><Account/></TabPanel>
+          <TabPanel value="1">
+            <Button variant='contained' color='primary' sx={{mb: 1}} onClick={() => navigate('/AddBlog')}>
+            <AddCircleOutlineIcon sx={{mr: 1}}/>
+                Add Blog
+            </Button>
+            <Blogs/>
+          </TabPanel>
+          <TabPanel value="2">
+            <Button variant='contained' color='primary' sx={{mb: 1}}>
+            <AddCircleOutlineIcon sx={{mr: 1}}/>
+                Add Project
+            </Button>
+            <Projects/>
+          </TabPanel>
+          <TabPanel value="3">
+            <Button variant='contained' color='primary' sx={{mb: 1}}>
+            <AddCircleOutlineIcon sx={{mr: 1}}/>
+                Add Event
+            </Button>
+            <Events/>
+          </TabPanel>
+          <TabPanel value="4">
+            <Button variant='contained' color='primary' sx={{mb: 1}}>
+            <AddCircleOutlineIcon sx={{mr: 1}}/>
+                Edit Account
+            </Button>
+            <Account/>
+          </TabPanel>
         </Grid>
       </Grid>
       

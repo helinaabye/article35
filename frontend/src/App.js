@@ -14,6 +14,7 @@ import Projects from './Pages/Projects';
 import Login from './Pages/Login';
 import AuthContextProvider from './contexts/authContext';
 import Profile from './Pages/Profile';
+import AddBlog from './Pages/AddBlog';
 const theme = createTheme({
   palette: {
     primary: {
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/Blogs" element={<Blogs/>}/>
             <Route exact path="/Login" element={<Login/>}/>
             <Route exact path="/Profile" element={<Profile/>}/>
+            <Route exact path="/AddBlog" element={<AddBlog/>}/>
           </Routes>
           <Footer/>
         </div>
