@@ -6,7 +6,6 @@ import BlogCard from '../Components/BlogCard';
 const Events = (props) => {
   return (
     <>    
-      <h1>Events</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <BlogCard img="https://source.unsplash.com/random/?festival" title="test" body="test test test test test test test test test test test"/>
         <BlogCard/>

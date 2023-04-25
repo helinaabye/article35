@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, CssBaseline, Grid, Card, CardContent,Typography,Link } from '@mui/material';
 import BlogCard from '../Components/BlogCard';
-import AddBlog from '../Components/AddBlog';
+import AddBlogModal from '../Components/AddBlogModal';
 import axios from 'axios';
 import { CloseOutlined } from '@mui/icons-material';
 
@@ -25,8 +25,7 @@ const Blogs = (props) => {
 
   return (
     <>    
-      <h1>Blogs</h1> 
-      {/* <AddBlog /> */}
+      {/* <AddBlogModal /> */}
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
        {
           postData.slice(0, 6).map((post,index) => {
