@@ -27,7 +27,7 @@ NOTE: In case of any unexpected response, please check the status code. Implemen
 #### 6. /api/users/user-id/blogs -> [GET]  => Retrives all blogs posted by a specific user based on the user id
 	Response: List of blog data
 ### Tags:
--
+---
 #### 1. /api/tags
 	>> GET: Retrives all tags
 	>> POST: Adds a new tag to the database. This work should be done by the admin.
@@ -43,7 +43,7 @@ NOTE: In case of any unexpected response, please check the status code. Implemen
 		Required field: name
 		Responese: The updated tag object
 ### Blogs:
--
+---
 #### 1. /api/blogs
 	>> GET: Retrives list of all blogs -> All approved or un approved blogs are retrived with this request
 	>> POST: Adds a new blog post to the database.
