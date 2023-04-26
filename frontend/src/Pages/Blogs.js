@@ -22,13 +22,21 @@ const Blogs = (props) => {
     .then(res => setPostData(res.data))
     .catch(err => console.log(err))
   },[])
+  
 
   return (
     <>    
-      {/* <AddBlogModal /> */}
+      <h1>Blogs</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+        
+          <BlogCard img="https://source.unsplash.com/random/?writing" title="Stories"/> 
+          <BlogCard img="https://source.unsplash.com/random/?women" title="Women"/> 
+          <BlogCard img="https://source.unsplash.com/random/?africa" title="Africa"/> 
+          <BlogCard img="https://source.unsplash.com/random/?books" title="Books"/> 
+          <BlogCard img="https://source.unsplash.com/random/?policy" title="Policy"/> 
+          <BlogCard img="https://source.unsplash.com/random/?meeting" title="Meeting"/> 
        {
-          postData.slice(0, 6).map((post,index) => {
+          postData.slice(0, 3).map((post,index) => {
             return <BlogCard key={index} img="https://source.unsplash.com/random/?writing" title={post.title} body={post.body}/>          
           })
         }
