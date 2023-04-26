@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 import { CssBaseline } from '@mui/material';
 
 
-const BlogCard = ({img, title, body}) => {
+const BlogCard = ({img, title, body, author}) => {
   return (
-    <Card sx={{ maxWidth: 345, margin: '10px' }}>
+    <Card sx={{ maxWidth: 345, margin: '10px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
       <CssBaseline/>
       <CardMedia
         component="img"
@@ -27,9 +27,10 @@ const BlogCard = ({img, title, body}) => {
           {body ? body : 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{display: 'flex', alignContent: 'flex-end'}}>
         <Button size="small">Like</Button>
         <Button size="small">Read More</Button>
+        <Button disabled size="small">By {author ? author : 'anonymous'}</Button>
       </CardActions>
     </Card>
   );

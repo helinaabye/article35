@@ -70,14 +70,14 @@ const Profile = (props) => {
             <Blogs/>
           </TabPanel>
           <TabPanel value="2">
-            <Button variant='contained' color='primary' sx={{mb: 1}}>
+            <Button variant='contained' color='primary' sx={{mb: 1}} onClick={() => navigate('/AddProject')}>
             <AddCircleOutlineIcon sx={{mr: 1}}/>
                 Add Project
             </Button>
             <Projects/>
           </TabPanel>
           <TabPanel value="3">
-            <Button variant='contained' color='primary' sx={{mb: 1}}>
+            <Button variant='contained' color='primary' sx={{mb: 1}} onClick={() => navigate('/AddEvent')}>
             <AddCircleOutlineIcon sx={{mr: 1}}/>
                 Add Event
             </Button>
@@ -85,8 +85,7 @@ const Profile = (props) => {
           </TabPanel>
           <TabPanel value="4">
             <Button variant='contained' color='primary' sx={{mb: 1}}>
-            <AddCircleOutlineIcon sx={{mr: 1}}/>
-                Edit Account
+                Edit
             </Button>
             <Account/>
           </TabPanel>
