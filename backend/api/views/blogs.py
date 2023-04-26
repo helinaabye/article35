@@ -17,7 +17,7 @@ from models.tag import Tag
 
 def validate_blog_data(data):
     """Validates blog data"""
-    exp_fields = ['title', 'summery', 'content', 'user_id', 'links']
+    exp_fields = ['title', 'summary', 'content', 'user_id']
     for field in exp_fields:
         if not data.get(field):
             abort(400, 'Missing {}'.format(field))
@@ -43,27 +43,30 @@ def handle_requests_for_all_blogs():
     if request.method == 'POST':
         data = request.form
         validate_blog_data(data)
+        path_to_be_stored = None
+        links = None
         file = request.files
-        if not file:
-            abort(400, 'File not uploaded')
-        image = file['image']
-        if not image:
-            abort(400, 'Uploaded file is not an image')
-        file_name = str(uuid4()) + '-' + data.get('title') + \
-            '-' + image.filename
-        file_name = file_name.replace(' ', '-')
-        full_path = os.path.join(
-            os.getcwd(), 'api/assets/blogs/', file_name)
-        image.save(full_path)
-        path_to_be_stored = os.path.join(
-            'assets/blogs/', file_name)
+        if file:
+            image = file['image']
+            if not image:
+                abort(400, 'Uploaded file is not an image')
+            file_name = str(uuid4()) + '-' + data.get('title') + \
+                '-' + image.filename
+            file_name = file_name.replace(' ', '-')
+            full_path = os.path.join(
+                os.getcwd(), 'api/assets/blogs/', file_name)
+            image.save(full_path)
+            path_to_be_stored = os.path.join(
+                'assets/blogs/', file_name)
+        if data.get('links'):
+            links = data.get('links')
         blog_data = {
             'title': data.get('title'),
-            'summery': data.get('summery'),
+            'summery': data.get('summary'),
             'approved': False,
             'content': data.get('content'),
             'user_id': data.get('user_id'),
-            'links': data.get('links'),
+            'links': links,
             'image_url': path_to_be_stored
         }
 
@@ -97,8 +100,8 @@ def handle_request_for_single_blog(blog_id):
             setattr(blog, 'title', data.get('title'))
         if data.get('content'):
             setattr(blog, 'content', data.get('content'))
-        if data.get('summery'):
-            setattr(blog, 'summery', data.get('summery'))
+        if data.get('summary'):
+            setattr(blog, 'summery', data.get('summary'))
         if data.get('links'):
             links = data.get('links')
             if type(links) == str:
