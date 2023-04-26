@@ -16,6 +16,7 @@ import Projects from './Projects';
 import Account from './Account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BlogCard from '../Components/BlogCard';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 
 //Profile page 
 const Profile = (props) => {
@@ -86,8 +87,14 @@ const Profile = (props) => {
       </Grid>
       <Grid item container xs={12} md={8}>
         <Grid item md={12}>
-            <Box sx={{ maxWidth: '480px', borderBottom: 1, borderColor: 'divider' }}>
-              <TabList variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="lab API tabs example">
+            <Box sx={{ maxWidth: { xs: 420, md: 480 }, borderBottom: 1, borderColor: 'divider' }}>
+              <TabList variant="scrollable" 
+                    sx={{
+                      [`& .${tabsClasses.scrollButtons}`]: {
+                        '&.Mui-disabled': { opacity: 0.3 },
+                      },
+                    }}
+                  scrollButtons onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label="Blogs" value="1" />
                 <Tab label="Projects" value="2" />
                 <Tab label="Events" value="3" />
@@ -106,7 +113,7 @@ const Profile = (props) => {
           <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
           {
             blogData.map((blog, index) => {
-              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved}/>          
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved} likes={blog.likes}/>          
             })
           }
           </Grid>
@@ -135,7 +142,7 @@ const Profile = (props) => {
           <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
           {
             unapproved.map((blog, index) => {
-              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved}/>          
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved} />          
             })
           }
           </Grid>

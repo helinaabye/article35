@@ -27,6 +27,7 @@ const AddBlog = (props) => {
         })
         .then(({data}) => {
           if (data) {
+            alert('You have successfuly submitted your blog. Please wait for approval from admin')
             navigate('/Profile')
           }
         })
