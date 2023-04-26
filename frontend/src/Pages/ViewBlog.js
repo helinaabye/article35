@@ -1,16 +1,19 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, useContext} from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import Button from '@mui/material/Button';
 import { Container, CssBaseline, Grid, TextareaAutosize, Typography } from '@mui/material';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/authContext';
 
 //Page to view one selected blog
 const ViewBlog = (props) => {
   const { blog_id } = useParams();
   const [blogData, setBlogData] = React.useState([]);
   const [userData, setUserData] = React.useState([]);
+  const navigate = useNavigate();
+  const { auth, dispatch } = useContext(AuthContext);
 
   useEffect(()=>{
     // Axios Method
@@ -30,23 +33,13 @@ const ViewBlog = (props) => {
   },[])
 
   
- 
-  //  const getAuthor = () => {
-  //     let id
-  //     if (blogData.length > 0) {
-  //       id = blogData.user_id
-  //      axios.get(`https://www.gizachew-bayness.tech/api/users/${id}`)
-  //      .then(({user}) => {
-  //        return user
-  //      })
-  //      .catch(err => console.log(err))
-  //     }
-  //   }
-
-  //   useEffect(()=>{
-  //     getAuthor()
-  //    },[])
- 
+  const approveBlog = () => {
+    axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/approve`, auth.user.id)
+    .then(({data}) => {
+      console.log(data)
+      })
+    .catch(err => console.log(err))
+  }
   return (
     <>
     <CssBaseline />
@@ -65,6 +58,11 @@ const ViewBlog = (props) => {
         <Grid item xs={8} sx={{mt: 2}}>
           {blogData.content}
         </Grid>
+        { auth.user && auth.user.is_admin ? (
+          <Grid item xs={8} sx={{mt: 2}}>
+            <Button variant='contained' onClick={approveBlog}>Approve Blog</Button>
+          </Grid>
+        ) : null}
       </Grid>  
     </>
   )

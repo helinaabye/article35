@@ -23,6 +23,8 @@ const Profile = (props) => {
     const { auth, dispatch } = useContext(AuthContext);
     const [value, setValue] = React.useState('1');
     const [blogData, setBlogData] = React.useState([]);
+    const [unapproved, setUnapproved] = React.useState([]);
+    const [userData, setUserData] = React.useState([]);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -41,8 +43,27 @@ const Profile = (props) => {
       })
       .catch(err => console.log(err))
     },[])
+    
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/users`)
+      .then(({data}) => {
+        setUserData(data)
+      })
+      .catch(err => console.log(err))
+    },[])
+    
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/blogs/unapproved`)
+      .then(({data}) => {
+        setUnapproved(data)
+      })
+      .catch(err => console.log(err))
+    },[])
 
-    console.log(blogData)
+
+    //console.log(blogData)
 
   return (
     <>    
@@ -65,12 +86,14 @@ const Profile = (props) => {
       </Grid>
       <Grid item container xs={12} md={8}>
         <Grid item md={12}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Box sx={{ maxWidth: '480px', borderBottom: 1, borderColor: 'divider' }}>
+              <TabList variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label="Blogs" value="1" />
                 <Tab label="Projects" value="2" />
                 <Tab label="Events" value="3" />
                 <Tab label="Account" value="4" />
+                {auth.user && auth.user.is_admin ? (<Tab label="Approve Blogs" value="5" />) : null}
+                {auth.user && auth.user.is_admin ? (<Tab label="Manage Users" value="6" />) : null}
               </TabList>
             </Box>
         </Grid>
@@ -107,6 +130,43 @@ const Profile = (props) => {
                 Edit
             </Button>
             <Account/>
+          </TabPanel>
+          <TabPanel value="5">
+          <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            unapproved.map((blog, index) => {
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved}/>          
+            })
+          }
+          </Grid>
+          </TabPanel>
+          <TabPanel value="6">
+          <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            userData.map((user, index) => {
+              return <Grid item xs={10} sx={{alignItems: 'center', justifyContent: 'space-evenly', pb: 1,  borderBottom: 1, borderColor: 'divider'}}spacing={2} container key={index}>
+              <Grid item xs={1} > 
+                {`${index + 1}. `} 
+              </Grid>
+                  <Grid item xs={1} > 
+                       <Avatar alt={user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${user.id}`} />
+                  </Grid>
+                  <Grid item xs={4}> 
+                       <Typography>{user.first_name + ' ' + user.last_name}</Typography>
+                  </Grid>
+                  <Grid item xs={2}> 
+                       <Typography>{user.is_admin ? ('Admin') : ('Member')}</Typography>
+                  </Grid>
+                  <Grid item xs={6} md={2}> 
+                       <Button variant='contained'>Promote</Button>
+                  </Grid>
+                  <Grid item xs={6} md={2}> 
+                       <Button variant='contained' color='error'>Remove</Button>
+                  </Grid>
+                    </Grid>   
+            })
+          }
+          </Grid>
           </TabPanel>
         </Grid>
       </Grid>

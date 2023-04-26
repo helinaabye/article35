@@ -30,6 +30,10 @@
   color: #61dafb;
 }
 
+.form {
+  width: 100vw;
+}
+
 a {
   text-decoration: none;
 }
