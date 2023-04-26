@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -15,12 +15,14 @@ import AddBlogModal from '../Components/AddBlogModal';
 import Projects from './Projects';
 import Account from './Account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import BlogCard from '../Components/BlogCard';
 
 //Profile page 
 const Profile = (props) => {
     const navigate = useNavigate();
     const { auth, dispatch } = useContext(AuthContext);
     const [value, setValue] = React.useState('1');
+    const [blogData, setBlogData] = React.useState([]);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -30,6 +32,17 @@ const Profile = (props) => {
       dispatch({type: 'SIGN_OUT'})
       navigate('/')
     }
+
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/users/${auth.user.id}/blogs`)
+      .then(({data}) => {
+      setBlogData(data)
+      })
+      .catch(err => console.log(err))
+    },[])
+
+    console.log(blogData)
 
   return (
     <>    
@@ -67,7 +80,13 @@ const Profile = (props) => {
             <AddCircleOutlineIcon sx={{mr: 1}}/>
                 Add Blog
             </Button>
-            <Blogs/>
+          <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            blogData.map((blog, index) => {
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved}/>          
+            })
+          }
+          </Grid>
           </TabPanel>
           <TabPanel value="2">
             <Button variant='contained' color='primary' sx={{mb: 1}} onClick={() => navigate('/AddProject')}>

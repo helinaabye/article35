@@ -28,8 +28,8 @@ const Signin=(props)=>{
         })
         .then(({data}) => {
           if (data) {
-            dispatch({type: "SIGN_IN", user: data})
-            navigate('/')
+            alert('You have successfuly submitted your blog. Please wait for approval from admin')
+            navigate('/Profile')
           }
         })
         .catch(err => console.log(err))
@@ -45,7 +45,7 @@ const Signin=(props)=>{
           <Grid align = 'center'>
             <Avatar style={avatarcolor}> <LockIcon /></Avatar>
             <h2>Sign In</h2> 
-            <Typography variant='caption' gutterBottom>Wellcome To Article35!</Typography>
+            <Typography variant='caption' gutterBottom>Welcome To Article35!</Typography>
 
           </Grid>
           <form onSubmit={(e) => submit(e.preventDefault())}>

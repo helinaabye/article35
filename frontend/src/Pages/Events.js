@@ -7,6 +7,7 @@ import EventCard from '../Components/EventCard';
 const Events = (props) => {
   return (
     <>    
+      <h1>Events</h1> 
       <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <EventCard img="https://source.unsplash.com/random/?festival" title="test event" body="test test test test test test test test test test test"/>
         <EventCard/>

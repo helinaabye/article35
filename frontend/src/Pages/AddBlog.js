@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import Button from '@mui/material/Button';
 import { Container, CssBaseline, Grid, TextareaAutosize, Box, Input, TextField, Link } from '@mui/material';
 import { Label } from '@mui/icons-material';
 import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../contexts/authContext';
 
 //Test page for adding blogs
 const AddBlog = (props) => {
@@ -22,8 +24,7 @@ const AddBlog = (props) => {
         })
         .then(({data}) => {
           if (data) {
-            dispatch({type: "SIGN_IN", user: data})
-            navigate('/')
+            navigate('/Profile')
           }
         })
         .catch(err => console.log(err))
