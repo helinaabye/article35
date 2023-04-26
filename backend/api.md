@@ -2,6 +2,7 @@
 
 NOTE: In case of any unexpected response, please check the status code. Implemented status codes are: 200, 201, 404, 401, 400
 ### Users:
+---
 #### 1. /api/users/sign-up  [POST] => Registers a new user
 	Required fields = {first_name, last_name, username, email, phone_number, password, is_admin = 'True' or 'False' string value}
 	Register only one account as admin by setting the value of is_admin to 'True'. Make sure you send the values of is_admin as a string.
@@ -26,6 +27,7 @@ NOTE: In case of any unexpected response, please check the status code. Implemen
 #### 6. /api/users/user-id/blogs -> [GET]  => Retrives all blogs posted by a specific user based on the user id
 	Response: List of blog data
 ### Tags:
+---
 #### 1. /api/tags
 	>> GET: Retrives all tags
 	>> POST: Adds a new tag to the database. This work should be done by the admin.
@@ -41,6 +43,7 @@ NOTE: In case of any unexpected response, please check the status code. Implemen
 		Required field: name
 		Responese: The updated tag object
 ### Blogs:
+---
 #### 1. /api/blogs
 	>> GET: Retrives list of all blogs -> All approved or un approved blogs are retrived with this request
 	>> POST: Adds a new blog post to the database.
