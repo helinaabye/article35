@@ -73,6 +73,9 @@ function Header() {
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Projects'} color='white' underline="hover">Projects</Link>
                 </Grid>
                 <Grid item>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Events'} color='white' underline="hover">Events</Link>
+                </Grid>
+                <Grid item>
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='white' underline="hover">Blogs</Link>
                 </Grid>
                 <Grid item>
@@ -94,7 +97,7 @@ function Header() {
                     )
                   }
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                 {
                   auth.user && auth.user.id ? (
                     <IconButton
@@ -112,7 +115,7 @@ function Header() {
                     <Link component={RouterLink} className='nav' rel="noopener" to={'./Login'} color='white' underline="hover">Login</Link>
                   )
                 }
-                </Grid>
+                </Grid> */}
               </Grid>
           </Box>
 
@@ -146,6 +149,9 @@ function Header() {
                 </MenuItem>
                 <MenuItem key={'Projects'} onClick={handleCloseUserMenu}>
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Projects'} color='purple' underline="hover">Projects</Link>
+                </MenuItem>
+                <MenuItem key={'Events'} onClick={handleCloseUserMenu}>
+                  <Link component={RouterLink} className='nav' rel="noopener" to={'./Events'} color='purple' underline="hover">Events</Link>
                 </MenuItem>
                 <MenuItem key={'Blogs'} onClick={handleCloseUserMenu}>
                   <Link component={RouterLink} className='nav' rel="noopener" to={'./Blogs'} color='purple' underline="hover">Blogs</Link>

@@ -19,10 +19,11 @@ const Account = (props) => {
   return (
     <>    
       <CssBaseline/>
-      <h1>{auth.user.first_name}</h1>
+      <h1>{auth.user.first_name + " " + auth.user.last_name}</h1>
+      <p>Username: {auth.user.username}</p>
       <Grid container spacing={2} direction='row' sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Grid item xs={10}>
-        <IconButton
+        Profile Picture: <IconButton
             size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -33,10 +34,13 @@ const Account = (props) => {
         </IconButton>
         </Grid>
         <Grid item xs={10}>
-            Bio
+        Bio: est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla
         </Grid>
         <Grid item xs={10}>
-            <Button variant='contained' onClick={() => signout()} >Delete Account</Button>
+        Status:  {auth.user.is_admin ? 'Admin' : 'Member'}
+        </Grid>
+        <Grid item xs={10}>
+            <Button variant='contained' color='error' onClick={() => signout()} >Delete</Button>
         </Grid>
       </Grid>
     </>
