@@ -1,6 +1,5 @@
 # API Documentation
 
-NOTE: In case of any unexpected response, please check the status code. Implemented status codes are: 200, 201, 404, 401, 400
 ### Users:
 ---
 #### 1. /api/users/sign-up  [POST] => Registers a new user
