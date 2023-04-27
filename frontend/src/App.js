@@ -18,6 +18,7 @@ import AddBlog from './Pages/AddBlog';
 import AddProject from './Pages/AddProject';
 import AddEvent from './Pages/AddEvent';
 import Events from './Pages/Events';
+import ViewBlog from './Pages/ViewBlog';
 const theme = createTheme({
   palette: {
     primary: {
@@ -45,6 +46,7 @@ function App() {
             <Route exact path="/Blogs" element={<Blogs/>}/>
             <Route exact path="/Login" element={<Login/>}/>
             <Route exact path="/Profile" element={<Profile/>}/>
+            <Route exact path="/View/:blog_id" element={<ViewBlog/>}/>
             <Route exact path="/AddBlog" element={<AddBlog/>}/>
             <Route exact path="/AddProject" element={<AddProject/>}/>
             <Route exact path="/AddEvent" element={<AddEvent/>}/>

@@ -37,7 +37,7 @@ class Event(BaseModel, Base):
     title = Column(String(1024), nullable=False)
     web_link = Column(String(10000))
     description = Column(Text, nullable=False)
-    image_url = Column(String(2000), nullable=False)
+    image_url = Column(String(2000))
     due_date = Column(DateTime, nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
 

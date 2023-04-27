@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -15,12 +15,17 @@ import AddBlogModal from '../Components/AddBlogModal';
 import Projects from './Projects';
 import Account from './Account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import BlogCard from '../Components/BlogCard';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 
 //Profile page 
 const Profile = (props) => {
     const navigate = useNavigate();
     const { auth, dispatch } = useContext(AuthContext);
     const [value, setValue] = React.useState('1');
+    const [blogData, setBlogData] = React.useState([]);
+    const [unapproved, setUnapproved] = React.useState([]);
+    const [userData, setUserData] = React.useState([]);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -31,10 +36,46 @@ const Profile = (props) => {
       navigate('/')
     }
 
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/users/${auth.user.id}/blogs`)
+      .then(({data}) => {
+      setBlogData(data)
+      })
+      .catch(err => console.log(err))
+    },[])
+    
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/users`)
+      .then(({data}) => {
+        setUserData(data)
+      })
+      .catch(err => console.log(err))
+    },[])
+    
+    useEffect(()=>{
+      // Axios Method
+      axios.get(`https://www.gizachew-bayness.tech/api/blogs/unapproved`)
+      .then(({data}) => {
+        setUnapproved(data)
+      })
+      .catch(err => console.log(err))
+    },[])
+
+    const deleteUser = (id) => {
+      axios.delete(`https://www.gizachew-bayness.tech/api/users/${id}`)
+      .then(({data}) => {
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+    };
+   
+
   return (
     <>    
       <CssBaseline/>
-      <Grid container>
+      <Grid container sx={{minHeight: '90vh'}}>
       <TabContext value={value}>
       <Grid item container xs={12} md={4} sx={{display: 'flex', alignContent: 'flex-start', pt:'40px', background: 'lightgrey'}}>
         <Grid item xs={12}>
@@ -47,17 +88,25 @@ const Profile = (props) => {
           <Typography sx={{p: '5px'}}>est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla</Typography>
         </Grid>
         <Grid item xs={12}>
-            <Button color='error' onClick={() => signout()} >Sign Out</Button>
+            <Button color='error' variant='contained' onClick={() => signout()} >Sign Out</Button>
         </Grid>
       </Grid>
       <Grid item container xs={12} md={8}>
         <Grid item md={12}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Box sx={{ maxWidth: { xs: 420, md: 480 }, borderBottom: 1, borderColor: 'divider' }}>
+              <TabList variant="scrollable" 
+                    sx={{
+                      [`& .${tabsClasses.scrollButtons}`]: {
+                        '&.Mui-disabled': { opacity: 0.3 },
+                      },
+                    }}
+                  scrollButtons onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label="Blogs" value="1" />
                 <Tab label="Projects" value="2" />
                 <Tab label="Events" value="3" />
                 <Tab label="Account" value="4" />
+                {auth.user && auth.user.is_admin ? (<Tab label="Approve Blogs" value="5" />) : null}
+                {auth.user && auth.user.is_admin ? (<Tab label="Manage Users" value="6" />) : null}
               </TabList>
             </Box>
         </Grid>
@@ -67,7 +116,13 @@ const Profile = (props) => {
             <AddCircleOutlineIcon sx={{mr: 1}}/>
                 Add Blog
             </Button>
-            <Blogs/>
+          <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            blogData.map((blog, index) => {
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved} likes={blog.likes}/>          
+            })
+          }
+          </Grid>
           </TabPanel>
           <TabPanel value="2">
             <Button variant='contained' color='primary' sx={{mb: 1}} onClick={() => navigate('/AddProject')}>
@@ -88,6 +143,48 @@ const Profile = (props) => {
                 Edit
             </Button>
             <Account/>
+          </TabPanel>
+          <TabPanel value="5">
+          <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            unapproved.map((blog, index) => {
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery}  
+              author={ userData.map((user, index) => {
+                if (user.id === blog.user_id) {
+                  return user.first_name
+                }
+              })} id={blog.id} approved={blog.approved} />          
+            })
+          }
+          </Grid>
+          </TabPanel>
+          <TabPanel value="6">
+          <Grid container spacing={2} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+          {
+            userData.map((user, index) => {
+              return <Grid item xs={10} sx={{alignItems: 'center', justifyContent: 'space-evenly', pb: 1,  borderBottom: 1, borderColor: 'divider'}}spacing={2} container key={index}>
+              <Grid item xs={1} > 
+                {`${index + 1}. `} 
+              </Grid>
+                  <Grid item xs={1} > 
+                       <Avatar alt={user.first_name} src={`https://www.gizachew-bayness.tech/api/images/user/${user.id}`} />
+                  </Grid>
+                  <Grid item xs={4}> 
+                       <Typography>{user.first_name + ' ' + user.last_name}</Typography>
+                  </Grid>
+                  <Grid item xs={2}> 
+                       <Typography>{user.is_admin ? ('Admin') : ('Member')}</Typography>
+                  </Grid>
+                  <Grid item xs={6} md={2}> 
+                       <Button variant='contained'>Promote</Button>
+                  </Grid>
+                  <Grid item xs={6} md={2}> 
+                       <Button variant='contained' color='error' onClick={deleteUser(user.id)}>Remove</Button>
+                  </Grid>
+                    </Grid>   
+            })
+          }
+          </Grid>
           </TabPanel>
         </Grid>
       </Grid>

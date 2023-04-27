@@ -45,20 +45,20 @@ def handle_requests_for_all_events():
     if request.method == 'POST':
         data = request.form
         validate_event_data(data)
+        path_to_be_stored = None
         file = request.files
-        if not file:
-            abort(400, 'No file uploaded')
-        image = file.get('image')
-        if not image:
-            abort(400, 'Uploaded file is not an image')
-        file_name = str(uuid4()) + '-' + data.get('title') + \
-            '-' + image.filename
-        file_name = file_name.replace(' ', '-')
-        full_path = os.path.join(
-            os.getcwd(), 'api/assets/events/', file_name)
-        image.save(full_path)
-        path_to_be_stored = os.path.join(
-            'assets/events/', file_name)
+        if file:
+            image = file.get('image')
+            if not image:
+                abort(400, 'Uploaded file is not an image')
+            file_name = str(uuid4()) + '-' + data.get('title') + \
+                '-' + image.filename
+            file_name = file_name.replace(' ', '-')
+            full_path = os.path.join(
+                os.getcwd(), 'api/assets/events/', file_name)
+            image.save(full_path)
+            path_to_be_stored = os.path.join(
+                'assets/events/', file_name)
         date = data.get('due_date')
         if type(date) == str:
             date = datetime.strptime(date, '%y-%m-%d')

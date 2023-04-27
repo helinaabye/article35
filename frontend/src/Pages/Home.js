@@ -16,12 +16,12 @@ const Home = (props) => {
         <Grid item xs={12} md={8}>
           <h1>Blogs</h1> 
         <Grid item container sx={{justifyContent: 'center'}}>
-          <BlogCard img="https://source.unsplash.com/random/?writing"/> 
-          <BlogCard img="https://source.unsplash.com/random/?women"/> 
-          <BlogCard img="https://source.unsplash.com/random/?africa"/> 
-          <BlogCard img="https://source.unsplash.com/random/?books"/> 
-          <BlogCard img="https://source.unsplash.com/random/?policy"/> 
-          <BlogCard img="https://source.unsplash.com/random/?meeting"/> 
+          <BlogCard img="https://source.unsplash.com/random/?writing" title="Stories"/> 
+          <BlogCard img="https://source.unsplash.com/random/?women" title="Women"/> 
+          <BlogCard img="https://source.unsplash.com/random/?africa" title="Africa"/> 
+          <BlogCard img="https://source.unsplash.com/random/?books" title="Books"/> 
+          <BlogCard img="https://source.unsplash.com/random/?policy" title="Policy"/> 
+          <BlogCard img="https://source.unsplash.com/random/?meeting" title="Meeting"/> 
         </Grid>
         </Grid>
         <Grid item container xs={12} md={4}  sx={{justifyContent: 'center'}}>
