@@ -50,7 +50,7 @@ const Signin=(props)=>{
           <form onSubmit={(e) => submit(e.preventDefault())}>
           <TextField variant="standard" fullWidth label='Username' placeholder="Enter your username" onChange={(e) => setInputs({ ...inputs, username: e.target.value })} />
           <TextField type='password' variant="standard" fullWidth label='Password' placeholder="Enter your password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
-          <Button variant="contained" style={btnstyle} fullWidth type='submit' color='secondary'>Sign In</Button>
+          <Button variant="contained" style={btnstyle} fullWidth type='submit' color='primary'>Sign In</Button>
           <Typography>
               <Link href="#">
                 Forgot Password?

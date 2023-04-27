@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/authContext';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 //Page to view one selected blog
 const ViewBlog = (props) => {
@@ -15,29 +17,36 @@ const ViewBlog = (props) => {
   const [userData, setUserData] = React.useState([]);
   const navigate = useNavigate();
   const { auth, dispatch } = useContext(AuthContext);
-  const [status, setStatus] = useState('');
+  const [likeCount, setLikeCount] = useState();
+  const [approved, setApproved] = useState(null);
 
   const likeAction = () => {
-      if (status === 'down' || status === '') {
-        axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/likes`, status)
+        axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/likes`, {status: 'up'})
         .then(({data}) => {
-          setStatus('up')
-        })
-        .catch(err => console.log(err))
-      } else if (status === 'up') {
-        axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/likes`, status)
-        .then(({data}) => {
-          setStatus('down')
+          setLikeCount(likeCount + 1)
+          console.log(data)
         })
         .catch(err => console.log(err))
       }
-  }
+
+  const dislikeAction = () => {
+        axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/likes`, {status: 'down'})
+        .then(({data}) => {
+          setLikeCount(likeCount - 1)
+          console.log(data)
+        })
+        .catch(err => console.log(err))
+      }
+
+ //console.log(blogData)
 
   useEffect(()=>{
     // Axios Method
      axios.get(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}`)
     .then(async ({data}) => {
     setBlogData(data)
+    setLikeCount(data.likes)
+    setApproved(data.approved)
   })
     .catch(err => console.log(err))
   },[])
@@ -52,7 +61,7 @@ const ViewBlog = (props) => {
 
   
   const approveBlog = () => {
-    axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/approve`, auth.user.id)
+    axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/approve`, {user_id: auth.user.id})
     .then(({data}) => {
       console.log(data)
       })
@@ -61,13 +70,13 @@ const ViewBlog = (props) => {
   return (
     <>
     <CssBaseline />
-      <Grid container xs={12} sx={{justifyContent: 'center', alignContent: 'flex-start', m: 5, height: '90vh'}}>
+      <Grid container xs={12} sx={{justifyContent: 'center', alignContent: 'flex-start', m: 5, minHeight: '90vh'}}>
         <Grid item xs={12}>
           <img src={`https://www.gizachew-bayness.tech/api/images/blog/${blogData.id}`}/>
           <h1>{blogData.title}</h1> 
           <Grid item container xs={12} direction='row' spacing={1} sx={{alignItems: 'center', justifyContent: 'center'}}>
             <FavoriteIcon color='primary'/> 
-            <Typography sx={{ml: 2, mr: 2}}>{blogData.likes} </Typography>
+            <Typography sx={{ml: 2, mr: 2}}>{likeCount} </Typography>
         </Grid>
         </Grid>
         <Grid item xs={8}>
@@ -81,9 +90,10 @@ const ViewBlog = (props) => {
           {blogData.content}
         </Grid>
         <Grid item xs={12} sx={{mt: 2}}>
-         <Button variant='contained' onClick={() => likeAction()}>{status === 'down' || status === '' ? ('Like') : ('Unlike')}</Button>
+         <Button variant='contained' color='success' sx={{mr: 2}} onClick={() => likeAction()}><ThumbUpAltIcon/> </Button>
+         <Button variant='contained' color='error' onClick={() => dislikeAction()}><ThumbDownAltIcon/> </Button>
         </Grid>
-        { auth.user && auth.user.is_admin ? (
+        { auth.user && auth.user.is_admin && approved===false ? (
           <Grid item xs={8} sx={{mt: 2}}>
             <Button variant='contained' onClick={approveBlog}>Approve Blog</Button>
           </Grid>

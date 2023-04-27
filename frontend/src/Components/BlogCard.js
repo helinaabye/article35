@@ -16,9 +16,8 @@ const BlogCard = ({img, title, body, author, id, approved, likes}) => {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-
   return (
-    <Card sx={{ maxWidth: 345, margin: '10px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', flexGrow: 1 }}>
+    <Card sx={{ maxWidth: 345, margin: '10px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', flexGrow: 1}}>
       <CssBaseline/>
       <CardMedia
         component="img"
@@ -45,10 +44,10 @@ const BlogCard = ({img, title, body, author, id, approved, likes}) => {
         ) : approved === false ? (
           <Button disabled size="small">pending</Button>
         ) : (null)}
-        {auth.user && likes ? (
+        {auth.user && (likes >= 0) ? (
           <Grid item container direction='row' spacing={1} sx={{alignItems: 'center', justifyContent: 'flex-end'}}>
             <FavoriteIcon color='primary'/> 
-            <Typography sx={{ml: 2, mr: 2}}>{likes} </Typography>
+            <Typography sx={{ml: 1, mr: 1}}>{likes} </Typography>
         </Grid>
         ) : (null)}
       </CardActions>

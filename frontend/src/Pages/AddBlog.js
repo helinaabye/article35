@@ -16,8 +16,8 @@ const AddBlog = (props) => {
   const [imageUrl, setImageUrl] = useState(null); 
   const [selectedImage, setSelectedImage] = useState(null);
   
-  const submit = () => {
-    if (inputs.title && inputs.content && inputs.image && inputs.summery && inputs.links && inputs.user_id) 
+  const submit = () => { 
+    if (inputs.title && inputs.content && inputs.image && inputs.summary && inputs.user_id) 
     {
         axios({
           method: "post",
@@ -37,7 +37,7 @@ const AddBlog = (props) => {
 
   useEffect(() => {
     if (auth.user) {
-      setInputs({ ...inputs, user_id: auth.user.id, links: [] })
+      setInputs({ ...inputs, user_id: auth.user.id })
     }
   }, []);
 
@@ -89,8 +89,8 @@ const AddBlog = (props) => {
         </Grid>
         </Grid>
         <TextField multiline required rows={15} variant='outlined' fullWidth label='Content' sx={{m:1}}  onChange={(e) => setInputs({ ...inputs, content: e.target.value })}/>
-        <TextField multiline required rows={2} variant='outlined' fullWidth label='Summary' sx={{m:1}} onChange={(e) => setInputs({ ...inputs, summery: e.target.value })}/>
-        <TextField variant="outlined" fullWidth label='Reference Link' sx={{ m: 1 }} onChange={(e) => setInputs({ ...inputs, links: [...inputs.links, e.target.value] })}/>
+        <TextField multiline required rows={2} variant='outlined' fullWidth label='Summary' sx={{m:1}} onChange={(e) => setInputs({ ...inputs, summary: e.target.value })}/>
+        <TextField variant="outlined" fullWidth label='Reference Link' sx={{ m: 1 }} onChange={(e) => setInputs({ ...inputs, links: ([e.target.value]).toString() })}/>
         <Button type='submit' variant='contained' sx={{m: 2}}>Submit</Button>
       </form>
       </Grid>

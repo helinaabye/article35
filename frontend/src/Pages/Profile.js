@@ -63,13 +63,19 @@ const Profile = (props) => {
       .catch(err => console.log(err))
     },[])
 
-
-    //console.log(blogData)
+    const deleteUser = (id) => {
+      axios.delete(`https://www.gizachew-bayness.tech/api/users/${id}`)
+      .then(({data}) => {
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+    };
+   
 
   return (
     <>    
       <CssBaseline/>
-      <Grid container>
+      <Grid container sx={{minHeight: '90vh'}}>
       <TabContext value={value}>
       <Grid item container xs={12} md={4} sx={{display: 'flex', alignContent: 'flex-start', pt:'40px', background: 'lightgrey'}}>
         <Grid item xs={12}>
@@ -82,7 +88,7 @@ const Profile = (props) => {
           <Typography sx={{p: '5px'}}>est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla</Typography>
         </Grid>
         <Grid item xs={12}>
-            <Button color='error' onClick={() => signout()} >Sign Out</Button>
+            <Button color='error' variant='contained' onClick={() => signout()} >Sign Out</Button>
         </Grid>
       </Grid>
       <Grid item container xs={12} md={8}>
@@ -142,7 +148,12 @@ const Profile = (props) => {
           <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
           {
             unapproved.map((blog, index) => {
-              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved} />          
+              return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery}  
+              author={ userData.map((user, index) => {
+                if (user.id === blog.user_id) {
+                  return user.first_name
+                }
+              })} id={blog.id} approved={blog.approved} />          
             })
           }
           </Grid>
@@ -168,7 +179,7 @@ const Profile = (props) => {
                        <Button variant='contained'>Promote</Button>
                   </Grid>
                   <Grid item xs={6} md={2}> 
-                       <Button variant='contained' color='error'>Remove</Button>
+                       <Button variant='contained' color='error' onClick={deleteUser(user.id)}>Remove</Button>
                   </Grid>
                     </Grid>   
             })

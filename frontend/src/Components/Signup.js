@@ -32,7 +32,7 @@ const Signup = (props) => {
       },[])
 
     const submit = () => {
-      if (inputs.first_name && inputs.last_name && inputs.username && inputs.email && inputs.phone_number && inputs.password && inputs.confirm_password && (inputs.password===inputs.confirm_password))
+      if (inputs.first_name && inputs.username && inputs.password && inputs.confirm_password && (inputs.password===inputs.confirm_password))
         axios({
             method: "post",
             url: "https://www.gizachew-bayness.tech/api/users/sign-up",
@@ -48,6 +48,8 @@ const Signup = (props) => {
         })
     }
 
+    console.log(inputs)
+
     return (
         <Grid>
             <Paper style={paperStyle}>
@@ -59,14 +61,14 @@ const Signup = (props) => {
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
                 <form onSubmit={(e) => submit(e.preventDefault())}>
-                    <TextField variant="standard" fullWidth label='First Name' placeholder="Enter your first name" onChange={(e) => setInputs({ ...inputs, first_name: e.target.value })}/>
+                    <TextField variant="standard" required fullWidth label='First Name' placeholder="Enter your first name" onChange={(e) => setInputs({ ...inputs, first_name: e.target.value })}/>
                     <TextField variant="standard" fullWidth label='Last Name' placeholder="Enter your last name" onChange={(e) => setInputs({ ...inputs, last_name: e.target.value })}/>
-                    <TextField variant="standard" fullWidth label='Username' placeholder="Enter your username" onChange={(e) => setInputs({ ...inputs, username: e.target.value })}/>
-                    <TextField variant="standard" fullWidth label='Email' placeholder="Enter your email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
-                    <TextField variant="standard" fullWidth label='Phone Number' placeholder="Enter your phone number" onChange={(e) => setInputs({ ...inputs, phone_number: e.target.value })} />
-                    <TextField variant="standard" fullWidth label='Password' placeholder="Enter your password" type="password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
-                    <TextField variant="standard" fullWidth label='Confirm Password' placeholder="Confirm your password"  onChange={(e) => setInputs({ ...inputs, confirm_password: e.target.value })}/>
-                    <Button type='submit' variant='contained' color='secondary' style={btnstyle} fullWidth>Sign up</Button>
+                    <TextField variant="standard" required fullWidth label='Username' placeholder="Enter your username" onChange={(e) => setInputs({ ...inputs, username: e.target.value })}/>
+                    {/* <TextField variant="standard" fullWidth label='Email' placeholder="Enter your email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
+                    <TextField variant="standard" fullWidth label='Phone Number' placeholder="Enter your phone number" onChange={(e) => setInputs({ ...inputs, phone_number: e.target.value })} /> */}
+                    <TextField variant="standard" required fullWidth label='Password' placeholder="Enter your password" type="password"  onChange={(e) => setInputs({ ...inputs, password: e.target.value })}/>
+                    <TextField variant="standard" type="password" fullWidth label='Confirm Password' placeholder="Confirm your password"  onChange={(e) => setInputs({ ...inputs, confirm_password: e.target.value })}/>
+                    <Button type='submit' variant='contained' color='primary' style={btnstyle} fullWidth>Sign up</Button>
                 </form>
             </Paper>
         </Grid>
