@@ -58,7 +58,4 @@ Here is an example of the BaseModel which we used as a base to apply to all of o
                self.created_at = datetime.utcnow()
                self.updated_at = datetime.utcnow()
 
-The Backend
-With the models in place the next step was to design the endpoints for our API - for that we started by designing the CRUD operators in the controllers and carefully designed our sterilizers and secure route. We spent most of this time designing sterilizers to make sure that we were serving all the right information to our front end whilst preventing infinite loops.
-
-Here is an example in the video controller using a router and secure route decorator. Here a user can post a nested comment - the nested comment data is passed additional fields and the video that had been commented on is returned -
+With the models in place the next step was to design the endpoints for our API - for that we started by designing the CRUD operators to make sure that we were serving all the right information to our front-end whilst preventing infinite loops.
