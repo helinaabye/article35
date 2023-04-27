@@ -48,7 +48,7 @@ const Signup = (props) => {
         })
     }
 
-    console.log(inputs)
+    
 
     return (
         <Grid>

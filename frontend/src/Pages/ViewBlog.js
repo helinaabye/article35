@@ -46,10 +46,11 @@ const ViewBlog = (props) => {
     .then(async ({data}) => {
     setBlogData(data)
     setLikeCount(data.likes)
-    setApproved(data.approved)
+    setApproved(data.approved)    
   })
     .catch(err => console.log(err))
   },[])
+
 
   useEffect(()=>{
      axios.get(`https://www.gizachew-bayness.tech/api/users`)
@@ -60,10 +61,20 @@ const ViewBlog = (props) => {
   },[])
 
   
+  const deleteBlog = (id) => {
+    axios.delete(`https://www.gizachew-bayness.tech/api/blogs/${id}`)
+    .then(({data}) => {
+      console.log(data)
+      navigate('/Profile')
+      })
+    .catch(err => console.log(err))
+  }
+  
   const approveBlog = () => {
     axios.post(`https://www.gizachew-bayness.tech/api/blogs/${blog_id}/approve`, {user_id: auth.user.id})
     .then(({data}) => {
-      console.log(data)
+      setApproved(true)
+      navigate('/Blogs')
       })
     .catch(err => console.log(err))
   }
@@ -89,15 +100,27 @@ const ViewBlog = (props) => {
         <Grid item xs={8} sx={{mt: 2}}>
           {blogData.content}
         </Grid>
-        <Grid item xs={12} sx={{mt: 2}}>
-         <Button variant='contained' color='success' sx={{mr: 2}} onClick={() => likeAction()}><ThumbUpAltIcon/> </Button>
-         <Button variant='contained' color='error' onClick={() => dislikeAction()}><ThumbDownAltIcon/> </Button>
+        {
+          auth.user && auth.user.id !== blogData.user_id ? (
+            <Grid item xs={12} sx={{mt: 2}}>
+             <Button variant='contained' color='success' sx={{mr: 2}} onClick={() => likeAction()}><ThumbUpAltIcon/> </Button>
+             <Button variant='contained' color='error' onClick={() => dislikeAction()}><ThumbDownAltIcon/> </Button>
+            </Grid>
+          ) : null}
+        <Grid item xs={8} sx={{mt: 2}}>
+          <Typography>Status: {approved ? ('Approved') : ('Pending Approval')}</Typography>
         </Grid>
-        { auth.user && auth.user.is_admin && approved===false ? (
+        {
+          auth.user && auth.user.id === blogData.user_id ? (
+              <Grid item xs={8} sx={{mt: 2}}>
+                <Button variant='outlined' color='error' onClick={() => deleteBlog(blog_id)}>Delete</Button>
+              </Grid>
+          ) : null}
+        { auth.user && auth.user.is_admin && approved===false  ? (
           <Grid item xs={8} sx={{mt: 2}}>
-            <Button variant='contained' onClick={approveBlog}>Approve Blog</Button>
+            <Button variant='contained' onClick={() => approveBlog()}>Approve Blog</Button>
           </Grid>
-        ) : null}
+        ) :  null}
       </Grid>  
     </>
   )

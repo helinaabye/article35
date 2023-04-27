@@ -21,7 +21,7 @@ const Blogs = (props) => {
 
   useEffect(()=>{
     // Axios Method
-    axios.get(`https://www.gizachew-bayness.tech/api/blogs`)
+    axios.get(`https://www.gizachew-bayness.tech/api/blogs/approved`)
     .then(({data}) => {
     setBlogData(data)
     })

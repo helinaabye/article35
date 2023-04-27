@@ -17,6 +17,8 @@ import Account from './Account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BlogCard from '../Components/BlogCard';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import Loading from '../Components/Loading';
+import cardLoading from '../Components/cardLoading';
 
 //Profile page 
 const Profile = (props) => {
@@ -26,6 +28,7 @@ const Profile = (props) => {
     const [blogData, setBlogData] = React.useState([]);
     const [unapproved, setUnapproved] = React.useState([]);
     const [userData, setUserData] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -41,6 +44,7 @@ const Profile = (props) => {
       axios.get(`https://www.gizachew-bayness.tech/api/users/${auth.user.id}/blogs`)
       .then(({data}) => {
       setBlogData(data)
+      setLoading(false)
       })
       .catch(err => console.log(err))
     },[])
@@ -71,6 +75,7 @@ const Profile = (props) => {
       .catch(err => console.log(err))
     };
    
+  
 
   return (
     <>    
@@ -87,11 +92,11 @@ const Profile = (props) => {
         <Grid item xs={12}>
           <Typography sx={{p: '5px'}}>est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla</Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{mb: 2, mt: 2}}>
             <Button color='error' variant='contained' onClick={() => signout()} >Sign Out</Button>
         </Grid>
       </Grid>
-      <Grid item container xs={12} md={8}>
+      <Grid item container xs={12} md={8} sx={{alignContent: 'flex-start'}}>
         <Grid item md={12}>
             <Box sx={{ maxWidth: { xs: 420, md: 480 }, borderBottom: 1, borderColor: 'divider' }}>
               <TabList variant="scrollable" 
@@ -117,7 +122,7 @@ const Profile = (props) => {
                 Add Blog
             </Button>
           <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-          {
+          { loading ? <Loading /> :
             blogData.map((blog, index) => {
               return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery} author={auth.user.first_name} id={blog.id} approved={blog.approved} likes={blog.likes}/>          
             })
@@ -146,7 +151,7 @@ const Profile = (props) => {
           </TabPanel>
           <TabPanel value="5">
           <Grid container sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-          {
+          { unapproved.length > 0 ? 
             unapproved.map((blog, index) => {
               return <BlogCard key={index} img={`https://www.gizachew-bayness.tech/api/images/blog/${blog.id}`} title={blog.title} body={blog.summery}  
               author={ userData.map((user, index) => {
@@ -154,7 +159,7 @@ const Profile = (props) => {
                   return user.first_name
                 }
               })} id={blog.id} approved={blog.approved} />          
-            })
+            }) : <Typography>No more blogs to approve for now!</Typography>
           }
           </Grid>
           </TabPanel>
@@ -175,12 +180,13 @@ const Profile = (props) => {
                   <Grid item xs={2}> 
                        <Typography>{user.is_admin ? ('Admin') : ('Member')}</Typography>
                   </Grid>
+                  { auth.user.id !== user.id ? 
                   <Grid item xs={6} md={2}> 
-                       <Button variant='contained'>Promote</Button>
-                  </Grid>
+                       <Button variant='contained' color='error' onClick={() => deleteUser(user.id)}>Delete</Button>
+                  </Grid> : 
                   <Grid item xs={6} md={2}> 
-                       <Button variant='contained' color='error' onClick={deleteUser(user.id)}>Remove</Button>
-                  </Grid>
+                       <Button variant='contained' disabled color='error' onClick={() => deleteUser(user.id)}>Delete</Button>
+                  </Grid> }
                     </Grid>   
             })
           }
