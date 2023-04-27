@@ -29,11 +29,11 @@ As for the user stroy we found that two pieces of design were important - firstl
 We identified that the place to start was with the Models we were providing to the Database. to provide all relevant fields to our Models and provided join tables where many to many relationships occurred.
 Here is an example of the BaseModel which we used as a base to apply to all of our models, including some functions that would be useful in the future -
 
-     class BaseModel:
+      `class BaseModel:
          """The BaseModel class for all models"""
          id: str = Column(String(60), primary_key=True)
          created_at: DateTime = Column(DateTime, default=datetime.utcnow())
-         updated_at: DateTime = Column(DateTime, default=datetime.utcnow())
+         updated_at: DateTime = Column(DateTime, default=datetime.utcnow())`
 
          def __init__(self, *args: list, **kwargs: dict) -> None:
          """Initializes the BaseModel class with preferable attributes"""
